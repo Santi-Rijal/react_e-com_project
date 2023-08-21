@@ -17,6 +17,11 @@ $hover-color: #e5d9b6;
 
   background-color: $bg-color;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // Bg logo
   .logo-container {
     width: 100%;
 
@@ -68,21 +73,38 @@ $hover-color: #e5d9b6;
 
       @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
         font-size: 3rem;
+
+        padding: 50px 0;
       }
     }
   }
 
+  // Container for nav, body, and footer.
   .layout-container {
+    width: 60%;
+
     position: relative;
     top: calc(100% - 55%);
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
+    @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+      width: 95%;
+      top: calc(100% - 74%);
+    }
+
+    @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+      width: 90%;
+      height: 100%;
+      top: calc(100% - 98%);
+    }
+
+    // Nav container
     .navbar-container {
-      width: 60%;
+      width: 100%;
       background-color: #ffffff11;
 
       position: sticky;
@@ -95,37 +117,79 @@ $hover-color: #e5d9b6;
         justify-content: space-evenly;
         align-items: center;
 
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          flex-direction: column;
+          align-items: start;
+
+          padding: 10px 20px;
+
+          background-color: #000000d8;
+          color: $text-color;
+
+          border-radius: 20px;
+
+          #close-menu {
+            font-size: 1.4rem;
+          }
+        }
+
         .link {
           text-decoration: none;
+          
+          color: $text-color;
+
+          font-size: 1.3rem;
           padding: 15px 0;
 
-          span {
-            color: $text-color;
-            font-size: 1.3rem;
-  
-            &:hover {
-              cursor: pointer;
-              color: $hover-color;
-            }
-  
-            &:active {
-              color: $logo-color;
-            }
-  
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
           }
-  
+
+          &:active {
+            color: $logo-color;
+          }
+          
           .clicked {
             color: $logo-color;
           }
 
-          #login {
+          #login, #logout {
             font-weight: bold;
           }
+        }
+      }
+
+      .menu-container {
+        box-sizing: border-box;
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        color: $text-color;
+        background-color: #ffffff11;
+
+        border-radius: 20px;
+        
+        font-size: 1.5rem;
+        padding: 7px 20px;
+
+        .link {
+          color: $text-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }
   
     .home-container {
+
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        
+      }
     }
   }
 
