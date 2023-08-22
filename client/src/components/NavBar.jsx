@@ -38,7 +38,7 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    if (currWindowSize < 768) {
+    if (currWindowSize < 1220) {
       setShowNavBar(false);
     }
     else {
@@ -52,28 +52,29 @@ const NavBar = () => {
         !showNavBar ? (
           <div className="menu-container">
             <AiOutlineMenuUnfold onClick={onUnFoldNav}/>
+            <span>{clickedId}</span>
             <Link className="link">
               <FaOpencart className={clickedId === "Cart" ? "clicked" : ""} onClick={() => onNavItemClick("Cart")}/>
             </Link>
           </div>
         ) : (
-          currWindowSize < 768 ? (
+          currWindowSize < 1220 ? (
             <div className="navbar">
               <AiOutlineMenuFold onClick={onUnFoldNav} id="close-menu"/>
               <Link className="link">
-                <span className={clickedId === "Home" ? "clicked" : ""} onClick={() => onNavItemClick("Home")}>Home</span>
+                <span className={clickedId === "Home" ? "clicked" : ""} onClick={() => {onNavItemClick("Home"); onUnFoldNav()}}>Home</span>
               </Link>
 
               <Link className="link">
-                <span className={clickedId === "Men's Clothing" ? "clicked" : ""} onClick={() => onNavItemClick("Men's Clothing")}>Men's Clothing</span>
+                <span className={clickedId === "Men's Clothing" ? "clicked" : ""} onClick={() => {onNavItemClick("Men's Clothing"); onUnFoldNav()}}>Men's Clothing</span>
               </Link>
 
               <Link className="link">
-                <span className={clickedId === "Women's Clothing" ? "clicked" : ""} onClick={() => onNavItemClick("Women's Clothing")}>Women's Clothing</span>
+                <span className={clickedId === "Women's Clothing" ? "clicked" : ""} onClick={() => {onNavItemClick("Women's Clothing"); onUnFoldNav()}}>Women's Clothing</span>
               </Link>
 
               <Link className="link">
-                <span className={clickedId === "Jewlery" ? "clicked" : ""} onClick={() => onNavItemClick("Jewlery")}>Jewelery</span>
+                <span className={clickedId === "Jewlery" ? "clicked" : ""} onClick={() => {onNavItemClick("Jewlery"); onUnFoldNav()}}>Jewelery</span>
               </Link>
 
               <Link className="link">
