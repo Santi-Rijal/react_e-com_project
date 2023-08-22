@@ -12,11 +12,15 @@ $text-color: #d8c690;
 $hover-color: #e5d9b6;
 
 .app {
-  width: 100vw;
-  height: 100vh;
-
   background-color: $bg-color;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: "Caviar Dreams";
+
+  // Bg logo
   .logo-container {
     width: 100%;
 
@@ -26,8 +30,6 @@ $hover-color: #e5d9b6;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    position: absolute;
 
     #top-blur {
       width: 100%;
@@ -57,7 +59,6 @@ $hover-color: #e5d9b6;
     .logo {
       box-sizing: border-box;
 
-      font-family: "Caviar Dreams";
       font-size: 8rem;
 
       color: $logo-color;
@@ -68,19 +69,23 @@ $hover-color: #e5d9b6;
 
       @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
         font-size: 3rem;
+
+        padding: 50px 0;
       }
     }
   }
 
-  .layout-container {
-    position: relative;
-    top: calc(100% - 55%);
+  // Container for nav, body, and footer.
+  .layout-container {   
+    width: 100%;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
+
+    // Nav container
     .navbar-container {
       width: 60%;
       background-color: #ffffff11;
@@ -89,43 +94,167 @@ $hover-color: #e5d9b6;
 
       border-radius: 20px;
 
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 90%;
+      }
+
       .navbar {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
 
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-tablet) {
+          flex-direction: column;
+          align-items: start;
+
+          padding: 10px 20px;
+
+          background-color: transparent;
+          color: $text-color;
+
+          border-radius: 20px;
+
+          #close-menu {
+            font-size: 1.4rem;
+          }
+        }
+
         .link {
           text-decoration: none;
+          
+          color: $text-color;
+
+          font-size: 1.3rem;
           padding: 15px 0;
 
-          span {
-            color: $text-color;
-            font-size: 1.3rem;
-  
-            &:hover {
-              cursor: pointer;
-              color: $hover-color;
-            }
-  
-            &:active {
-              color: $logo-color;
-            }
-  
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            font-size: 1.1rem;
           }
-  
+
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
+          }
+
+          &:active {
+            color: $logo-color;
+          }
+          
           .clicked {
             color: $logo-color;
           }
 
-          #login {
+          #login, #logout {
             font-weight: bold;
           }
+        }
+      }
+
+      .menu-container {
+        box-sizing: border-box;
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        color: $text-color;
+        background-color: #ffffff11;
+
+        border-radius: 20px;
+        
+        font-size: 1.5rem;
+        padding: 7px 20px;
+
+        @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+          padding: 15px 25px;
+        }
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          font-size: 1.3rem;
+        }
+
+        .link {
+          color: $text-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }
   
     .home-container {
+
+      color: $text-color;
+    }
+
+    // Footer container.
+    .footer-container {
+      width: 100%;
+
+      padding: 30px 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 20px;
+
+      background-color: #1a1a1a;
+      color: $text-color;
+
+      .info {
+        width: 60%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+        }
+    
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .shop, .corporate-info, .help {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+
+        h3 {
+          color: $logo-color;
+        }
+
+        p {
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline $logo-color;
+          }
+        }
+      }
+
+      .socials {
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+
+        font-size: 1.5rem;
+
+        .social-icon {
+          transition: transform 0.3s ease;
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+          }
+        }
+      }
     }
   }
 

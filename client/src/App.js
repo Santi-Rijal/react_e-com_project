@@ -4,6 +4,9 @@ import Home from './pages/Home'
 import './style/App.scss';
 import'./style/fonts.scss';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import MenClothing from './pages/MenClothing';
+import WomenClothing from './pages/WomenClothing';
+import Jewelery from './pages/Jewelry';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +16,21 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        errorElement: <Error />
+      },
+      {
+        path: "/men's-clothing",
+        element: <MenClothing />,
+        errorElement: <Error />
+      },
+      {
+        path: "/women's-clothing",
+        element: <WomenClothing />,
+        errorElement: <Error />
+      },
+      {
+        path: "/jewelry",
+        element: <Jewelery />,
         errorElement: <Error />
       }
     ]
