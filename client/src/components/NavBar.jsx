@@ -74,7 +74,7 @@ const NavBar = () => {
               </Link>
 
               <Link className="link" to={"/jewlery"}>
-                <span className={clickedId === "Jewlery" ? "clicked" : ""} onClick={() => {onNavItemClick("Jewlery"); onUnFoldNav()}}>Jewelery</span>
+                <span className={clickedId === "Jewlery" ? "clicked" : ""} onClick={() => {onNavItemClick("Jewelry"); onUnFoldNav()}}>Jewelery</span>
               </Link>
 
               <Link className="link"  to={"/login"}>
