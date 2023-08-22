@@ -88,7 +88,9 @@ $hover-color: #e5d9b6;
     // Nav container
     .navbar-container {
       width: 60%;
+
       background-color: #ffffff11;
+      box-shadow: 0 0 10px $hover-color;
 
       position: sticky;
 
@@ -187,13 +189,25 @@ $hover-color: #e5d9b6;
   
     // Home container
     .home-container {
-      background-color: #fff;
+      box-sizing: border-box;
+      background-color: $logo-bg-color;
+      box-shadow: 0 0 10px $hover-color;
+
+      border-radius: 20px;
+
       width: 60%;
 
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
+
+      padding: 10px 20px;
+      margin: 25px 0;
+
+      h1 {
+        color: $logo-color;
+      }
 
       // Carousels in the container
       .carousel-container {
@@ -290,6 +304,13 @@ $hover-color: #e5d9b6;
 
           border-radius: 10px;
           border: 1px solid $logo-color;
+        }
+
+        // Carousel slider.
+        .carousel-slider {
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+
         }
 
         .control-next::before {
