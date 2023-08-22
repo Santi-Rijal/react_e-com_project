@@ -88,7 +88,9 @@ $hover-color: #e5d9b6;
     // Nav container
     .navbar-container {
       width: 60%;
+
       background-color: #ffffff11;
+      box-shadow: 0 0 10px $hover-color;
 
       position: sticky;
 
@@ -185,9 +187,143 @@ $hover-color: #e5d9b6;
       }
     }
   
+    // Home container
     .home-container {
+      box-sizing: border-box;
+      background-color: $logo-bg-color;
+      box-shadow: 0 0 10px $hover-color;
 
-      color: $text-color;
+      border-radius: 20px;
+
+      width: 60%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+
+      padding: 10px 20px;
+      margin: 25px 0;
+
+      h1 {
+        color: $logo-color;
+      }
+
+      // Carousels in the container
+      .carousel-container {
+
+        // The entire hero component.
+        .hero-container {     
+          
+          // Text in top of each image in carousel.
+          .foreground {
+            position: absolute;
+      
+            color: $text-color;
+            background-color: $logo-bg-color;
+      
+            width: 40%;
+            padding: 70px 40px;
+            top: calc(100% - 95%);
+            left: calc(100% - 95%);
+      
+            border-radius: 10px;
+            border: 1px solid $logo-color;
+            box-shadow: 0 0 10px $bg-color;
+      
+            .info {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+      
+              span {
+                background-color: $bg-color;
+      
+                padding: 10px;
+                width: max-content;
+      
+                border: 1px solid $logo-color;
+                border-radius: 10px;
+      
+                &:hover {
+                  cursor: pointer;
+                  box-shadow: 0 0 10px $text-color;
+                  color: $hover-color;
+                }
+              }
+            }
+          }
+        }
+
+        // Carousel dots at the bottom.
+        .control-dots {
+          width: max-content;
+          left: calc(100% - 54%);
+
+          background-color: $logo-bg-color;
+          box-shadow: 0 0 10px $bg-color;
+
+          padding: 10px;
+
+          border: 1px solid $logo-color;
+          border-radius: 20px;
+          
+          .dot {
+            background: $logo-color;
+          }
+        }
+
+        // Carousel arrows.
+        .control-arrow {
+          width: 50px;
+          height: 50px;
+          top: calc(100% - 45%);
+
+          background-color: $logo-bg-color;
+          opacity: 1;
+
+          border-radius: 50%;
+          margin: 0 20px;
+
+          box-shadow: 0 0 10px $bg-color;
+          border: 1px solid $logo-color;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        // Carousel items.
+        .carousel-status {
+          color: $text-color;
+          background-color: $logo-bg-color;
+          box-shadow: 0 0 10px $bg-color;
+
+          padding: 8px;
+          margin-right: 8px;
+
+          border-radius: 10px;
+          border: 1px solid $logo-color;
+        }
+
+        // Carousel slider.
+        .carousel-slider {
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+
+        }
+
+        .control-next::before {
+          border-left: 10px solid $logo-color;
+          margin: 0;
+        }
+
+        .control-prev::before {
+          border-right: 8px solid $logo-color;
+          margin: 0;
+        }
+      }
+      
     }
 
     // Footer container.
@@ -257,5 +393,4 @@ $hover-color: #e5d9b6;
       }
     }
   }
-
 }
