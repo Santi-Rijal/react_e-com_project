@@ -3,10 +3,12 @@ import Item from '../components/Item';
 
 const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
+  const [pagenum, setPagenum] = useState(1);
+  const [start, setStart] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=clothing&rows=12&start=0&gender=Female';
+      const url = `https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=clothing&rows=12&start=${start}&gender=Female`;
       const options = {
         method: 'GET',
         headers: {
@@ -25,14 +27,33 @@ const WomenClothing = () => {
     }
 
     fetchData();
+  }, [pagenum, start]);
 
-  }, []);
+  console.log(womenClothing);
+
+  const handlePageChange = (e) => {
+    const clickedPage = +e.target.getAttribute("value");
+    const start = clickedPage === 1 ? (12 * clickedPage) - 12 : (12 * clickedPage) - 11;
+
+    setStart(start);
+    setPagenum(clickedPage);
+  }
 
   return (
     <div className="clothing">
-      {womenClothing.map(itemObj => (
-        <Item key={itemObj.pid} itemObj={itemObj} />
-      ))}
+      <div className="items">
+        {womenClothing.map(itemObj => (
+          <Item key={itemObj.pid} itemObj={itemObj} />
+        ))}
+      </div>
+
+      <div className="pages">
+        <span value="1" onClick={handlePageChange} className={pagenum === 1 ? "clicked" : ""}>1</span>
+        <span value="2" onClick={handlePageChange} className={pagenum === 2 ? "clicked" : ""}>2</span>
+        <span value="3" onClick={handlePageChange} className={pagenum === 3 ? "clicked" : ""}>3</span>
+        <span value="4" onClick={handlePageChange} className={pagenum === 4 ? "clicked" : ""}>4</span>
+        <span value="5" onClick={handlePageChange} className={pagenum === 5 ? "clicked" : ""}>5</span>
+      </div>
     </div>
   )
 }

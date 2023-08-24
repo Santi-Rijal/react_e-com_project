@@ -496,6 +496,8 @@ $item-bg: #ffffff;
         .clicked {
           color: $logo-color;
           background-color: $bg-color;
+          border-radius: 5px;
+          box-shadow: 0 0 5px $hover-color;
         }
       }
     }

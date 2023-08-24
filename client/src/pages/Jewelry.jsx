@@ -4,10 +4,11 @@ import Item from '../components/Item';
 const Jewelery = () => {
   const [jewelry, setJewelry] = useState([]);
   const [pagenum, setPagenum] = useState(1);
+  const [start, setStart] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=jewelry&rows=12&start=0';
+      const url = `https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=jewelry&rows=12&start=${start}`;
       const options = {
         method: 'GET',
         headers: {
@@ -27,17 +28,21 @@ const Jewelery = () => {
 
     fetchData();
 
-  }, [pagenum]);
+  }, [pagenum, start]);
 
   const handlePageChange = (e) => {
-    setPagenum(+e.target.getAttribute("value"));
+    const clickedPage = +e.target.getAttribute("value");
+    const start = clickedPage === 1 ? (12 * clickedPage) - 12 : (12 * clickedPage) - 11;
+
+    setStart(start);
+    setPagenum(clickedPage);
   }
   
   return (
     <div className="clothing">
       <div className="items">
         {jewelry.map(itemObj => (
-          <Item key={itemObj.id} itemObj={itemObj} />
+          <Item key={itemObj.pid} itemObj={itemObj} />
         ))}
       </div>
 
