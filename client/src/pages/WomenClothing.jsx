@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react'
+import Item from '../components/Item';
 
 const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("https://fakestoreapi.com/products/category/women's%20clothing");
-      const data = await res.json();
-      setWomenClothing(data);
+      const url = 'https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=clothing&rows=12&start=0&gender=Female';
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5',
+          'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        setWomenClothing(data.response.docs);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     fetchData();
@@ -15,14 +29,9 @@ const WomenClothing = () => {
   }, []);
 
   return (
-    <div className="women-clothing">
-      {womenClothing.map(item => (
-        <div key={item.id}>
-          <h2>{item.title}</h2>
-          <p>Price: ${item.price}</p>
-          <p>Description: {item.description}</p>
-          <img src={item.image} alt={item.title} />
-        </div>
+    <div className="clothing">
+      {womenClothing.map(itemObj => (
+        <Item key={itemObj.pid} itemObj={itemObj} />
       ))}
     </div>
   )

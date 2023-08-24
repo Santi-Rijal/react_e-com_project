@@ -10,6 +10,7 @@ $logo-bg-color: #1a1a1a;
 $bg-color: #000;
 $text-color: #d8c690;
 $hover-color: #e5d9b6;
+$item-bg: #ffffff;
 
 .app {
   background-color: $bg-color;
@@ -404,6 +405,97 @@ $hover-color: #e5d9b6;
             margin-bottom: 6px;
             margin-right: 2px;
           }
+        }
+      }
+    }
+
+    .clothing {
+      box-sizing: border-box;
+      width: 60%;
+      margin: 25px 0;
+      padding: 40px 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      background-color: $logo-bg-color;
+      box-shadow: 0 0 10px $hover-color;
+
+      border-radius: 20px;
+
+      .items {
+  
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        row-gap: 40px;
+       
+        .item-container {
+          width: 300px;
+          height: 500px;
+          padding: 10px;
+  
+          position: relative;
+  
+          background-color: $item-bg;
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+  
+          transition: transform 0.3s ease;
+  
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            transform: scale(1.01);
+          }
+  
+          .img-container {
+            box-sizing: border-box;
+            width: 100%;
+            height: 80%;
+  
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+  
+          .info {
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .pages {
+        width: max-content;
+        color: $text-color;
+        padding-top: 40px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 10px;
+
+        span {
+          padding: 5px;
+
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
+            text-decoration: underline $hover-color;
+          }
+
+          &:active {
+            color: $logo-color;
+          }
+        }
+
+        .clicked {
+          color: $logo-color;
+          background-color: $bg-color;
         }
       }
     }
