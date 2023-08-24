@@ -108,7 +108,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <section className="mens-carousel">
-        <h1>MEN</h1>
+        <h1 className="carousel-header">MEN</h1>
         <Carousel className="carousel-container">
           {
             menHeros.map(heroObj => (
@@ -119,7 +119,7 @@ const Home = () => {
       </section>
 
       <section className="womens-carousel">
-        <h1>WOMEN</h1>
+        <h1 className="carousel-header">WOMEN</h1>
         <Carousel className="carousel-container">
           {
             womenHeros.map(heroObj => (
@@ -130,7 +130,7 @@ const Home = () => {
       </section>
 
       <section className="jewels-carousel">
-        <h1>JEWELRY</h1>
+        <h1 className="carousel-header">JEWELRY</h1>
         <Carousel className="carousel-container">
           {
             jewelsHeros.map(heroObj => (
