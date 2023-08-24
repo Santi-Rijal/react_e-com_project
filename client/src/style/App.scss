@@ -10,6 +10,7 @@ $logo-bg-color: #1a1a1a;
 $bg-color: #000;
 $text-color: #d8c690;
 $hover-color: #e5d9b6;
+$item-bg: #ffffff;
 
 .app {
   background-color: $bg-color;
@@ -97,6 +98,10 @@ $hover-color: #e5d9b6;
       border-radius: 20px;
 
       @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 90%;
+      }
+
+      @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
         width: 90%;
       }
 
@@ -205,8 +210,26 @@ $hover-color: #e5d9b6;
       padding: 10px 20px;
       margin: 25px 0;
 
-      h1 {
+      @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+        width: 90%;
+      }
+
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .carousel-header {
         color: $logo-color;
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          font-size: 1.3rem;
+        }
+
+        @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+          font-size: 1.5rem;
+        }
       }
 
       // Carousels in the container
@@ -230,11 +253,48 @@ $hover-color: #e5d9b6;
             border-radius: 10px;
             border: 1px solid $logo-color;
             box-shadow: 0 0 10px $bg-color;
+
+            @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+              width: 60%;
+              background-color: #1a1a1aa1;
+              padding: 30px 30px;
+            }
+
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              width: 80%;
+              padding: 0px 10px;
+              left: calc(100% - 98%);
+
+              background-color: #1a1a1aa1;
+            }
       
             .info {
               display: flex;
               flex-direction: column;
               align-items: center;
+
+              @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+                font-size: 0.8rem;
+                align-items: flex-start;
+
+                h1, h3 {
+                  text-align: start;
+                }
+              }
+
+              @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+                font-size: 0.6rem;
+                flex-direction: row;
+                justify-content: space-between;
+
+                h1 {
+                  text-align: start;
+                }
+
+                h3 {
+                  display: none;
+                }
+              }
       
               span {
                 background-color: $bg-color;
@@ -267,6 +327,11 @@ $hover-color: #e5d9b6;
 
           border: 1px solid $logo-color;
           border-radius: 20px;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            padding: 5px;
+            left: calc(100% - 62%);
+          }
           
           .dot {
             background: $logo-color;
@@ -291,6 +356,11 @@ $hover-color: #e5d9b6;
           &:hover {
             opacity: 0.8;
           }
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            width: 30px;
+            height: 30px;
+          }
         }
 
         // Carousel items.
@@ -304,6 +374,10 @@ $hover-color: #e5d9b6;
 
           border-radius: 10px;
           border: 1px solid $logo-color;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            display: none;
+          }
         }
 
         // Carousel slider.
@@ -316,14 +390,116 @@ $hover-color: #e5d9b6;
         .control-next::before {
           border-left: 10px solid $logo-color;
           margin: 0;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            margin-bottom: 6px;
+            margin-left: 2px;
+          }
         }
 
         .control-prev::before {
           border-right: 8px solid $logo-color;
           margin: 0;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            margin-bottom: 6px;
+            margin-right: 2px;
+          }
         }
       }
+    }
+
+    .clothing {
+      box-sizing: border-box;
+      width: 60%;
+      margin: 25px 0;
+      padding: 40px 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       
+      background-color: $logo-bg-color;
+      box-shadow: 0 0 10px $hover-color;
+
+      border-radius: 20px;
+
+      .items {
+  
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        row-gap: 40px;
+       
+        .item-container {
+          width: 300px;
+          height: 500px;
+          padding: 10px;
+  
+          position: relative;
+  
+          background-color: $item-bg;
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+  
+          transition: transform 0.3s ease;
+  
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            transform: scale(1.01);
+          }
+  
+          .img-container {
+            box-sizing: border-box;
+            width: 100%;
+            height: 80%;
+  
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+  
+          .info {
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .pages {
+        width: max-content;
+        color: $text-color;
+        padding-top: 40px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 10px;
+
+        span {
+          padding: 5px;
+
+          &:hover {
+            cursor: pointer;
+            color: $hover-color;
+            text-decoration: underline $hover-color;
+          }
+
+          &:active {
+            color: $logo-color;
+          }
+        }
+
+        .clicked {
+          color: $logo-color;
+          background-color: $bg-color;
+          border-radius: 5px;
+          box-shadow: 0 0 5px $hover-color;
+        }
+      }
     }
 
     // Footer container.
