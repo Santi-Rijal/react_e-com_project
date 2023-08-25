@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Item from '../components/ItemCard';
+import ItemCard from '../components/ItemCard';
 
 const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
@@ -43,7 +43,7 @@ const WomenClothing = () => {
     <div className="clothing">
       <div className="items">
         {womenClothing.map(itemObj => (
-          <Item key={itemObj.pid} itemObj={itemObj} />
+          <ItemCard key={itemObj.pid} itemObj={itemObj} />
         ))}
       </div>
 
