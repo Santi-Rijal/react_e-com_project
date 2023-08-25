@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Item = ({ itemObj }) => {
+  console.log(itemObj);
   return (
     <div className="item-container">
       <div className="img-container">
