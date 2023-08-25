@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Item from '../components/Item';
+import ItemCard from '../components/ItemCard';
+
+import { Link } from 'react-router-dom';
 
 const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
@@ -43,7 +45,9 @@ const WomenClothing = () => {
     <div className="clothing">
       <div className="items">
         {womenClothing.map(itemObj => (
-          <Item key={itemObj.pid} itemObj={itemObj} />
+          <Link className="link" to="/item" state={{ itemObj: itemObj }}>
+            <ItemCard key={itemObj.pid} itemObj={itemObj} />
+          </Link>
         ))}
       </div>
 
