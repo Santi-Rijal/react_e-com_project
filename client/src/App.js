@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MenClothing from './pages/MenClothing';
 import WomenClothing from './pages/WomenClothing';
 import Jewelery from './pages/Jewelry';
+import Item from './pages/Item';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
       {
         path: "/jewelry",
         element: <Jewelery />,
+        errorElement: <Error />
+      },
+      {
+        path: "/item",
+        element: <Item />,
         errorElement: <Error />
       }
     ]
