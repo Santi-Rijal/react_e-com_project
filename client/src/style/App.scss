@@ -12,6 +12,34 @@ $text-color: #d8c690;
 $hover-color: #e5d9b6;
 $item-bg: #dbdbdb;
 
+html {
+  /* Track */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: $text-color;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $hover-color;
+  }
+
+  /* Handle on active */
+  ::-webkit-scrollbar-thumb:active {
+    background-color: $logo-color;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $bg-color;
+  }
+}
+
 .app {
   background-color: $bg-color;
 
@@ -20,6 +48,7 @@ $item-bg: #dbdbdb;
   align-items: center;
 
   font-family: "Caviar Dreams";
+
 
   .link {
     text-decoration: none;
@@ -553,8 +582,25 @@ $item-bg: #dbdbdb;
 
       color: $text-color;
 
+      @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+        width: 90%;
+      }
+
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 100%;
+
+        box-shadow: none;
+        border-radius: 0;
+
+        flex-direction: column;
+      }
+
       .img-container {
         width: 50%;
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          width: 100%;
+        }
 
         img {
           width: 100%;
@@ -574,6 +620,10 @@ $item-bg: #dbdbdb;
         width: 45%;
         padding: 0 20px;
 
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          width: 100%;
+        }
+
         .info {
           box-sizing: border-box;
           width: 100%;
@@ -588,6 +638,14 @@ $item-bg: #dbdbdb;
           column-gap: 20px;
           flex-wrap: wrap;
 
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            justify-content: space-between;
+          }
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            justify-content: space-between;
+          }
+
           .variant-container {
             box-sizing: border-box;
             width: 15%;
@@ -599,6 +657,18 @@ $item-bg: #dbdbdb;
             background-color: $bg-color;
             border-radius: 10px;
             box-shadow: 0 0 5px $bg-color;
+
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              width: 25%;
+              
+              p {
+                word-wrap: break-word;
+              }
+            }
+
+            @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+              width: 30%;
+            }
 
             img {
               border-radius: 0 0 10px 10px;
@@ -614,11 +684,13 @@ $item-bg: #dbdbdb;
               color: $logo-color;
             }
 
-            .clicked {
+            &.clicked {
               color: $logo-color;
+              box-shadow: none;
               border: 1px solid $logo-color;
             }
           }
+
         }
 
         .size-container {
@@ -629,6 +701,14 @@ $item-bg: #dbdbdb;
           flex-wrap: wrap;
           column-gap: 20px;
           row-gap: 20px;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            justify-content: space-between;
+          }
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            justify-content: space-between;
+          }
 
           span {
             box-sizing: border-box;
@@ -654,11 +734,13 @@ $item-bg: #dbdbdb;
               color: $logo-color;
             }
 
-            .clicked {
+            &.clicked {
               color: $logo-color;
+              box-shadow: none;
               border: 1px solid $logo-color;
             }
           }
+
         }
 
         #add-btn {
@@ -672,6 +754,10 @@ $item-bg: #dbdbdb;
 
           border-radius: 10px;
           border: 1px solid $logo-color;
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            font-size: 1.3rem;
+          }
 
           &:hover {
             cursor: pointer;
