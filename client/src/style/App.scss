@@ -582,8 +582,25 @@ html {
 
       color: $text-color;
 
+      @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+        width: 90%;
+      }
+
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 100%;
+
+        box-shadow: none;
+        border-radius: 0;
+
+        flex-direction: column;
+      }
+
       .img-container {
         width: 50%;
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          width: 100%;
+        }
 
         img {
           width: 100%;
@@ -603,6 +620,10 @@ html {
         width: 45%;
         padding: 0 20px;
 
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          width: 100%;
+        }
+
         .info {
           box-sizing: border-box;
           width: 100%;
@@ -617,6 +638,14 @@ html {
           column-gap: 20px;
           flex-wrap: wrap;
 
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            justify-content: space-between;
+          }
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            justify-content: space-between;
+          }
+
           .variant-container {
             box-sizing: border-box;
             width: 15%;
@@ -628,6 +657,18 @@ html {
             background-color: $bg-color;
             border-radius: 10px;
             box-shadow: 0 0 5px $bg-color;
+
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              width: 25%;
+              
+              p {
+                word-wrap: break-word;
+              }
+            }
+
+            @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+              width: 30%;
+            }
 
             img {
               border-radius: 0 0 10px 10px;
@@ -642,12 +683,14 @@ html {
             &:active {
               color: $logo-color;
             }
+
+            &.clicked {
+              color: $logo-color;
+              box-shadow: none;
+              border: 1px solid $logo-color;
+            }
           }
 
-          .clicked {
-            color: $logo-color;
-            border: 1px solid $logo-color;
-          }
         }
 
         .size-container {
@@ -658,6 +701,14 @@ html {
           flex-wrap: wrap;
           column-gap: 20px;
           row-gap: 20px;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            justify-content: space-between;
+          }
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            justify-content: space-between;
+          }
 
           span {
             box-sizing: border-box;
@@ -682,12 +733,14 @@ html {
             &:active {
               color: $logo-color;
             }
+
+            &.clicked {
+              color: $logo-color;
+              box-shadow: none;
+              border: 1px solid $logo-color;
+            }
           }
 
-          .clicked {
-            color: $logo-color;
-            border: 1px solid $logo-color;
-          }
         }
 
         #add-btn {
@@ -701,6 +754,10 @@ html {
 
           border-radius: 10px;
           border: 1px solid $logo-color;
+
+          @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+            font-size: 1.3rem;
+          }
 
           &:hover {
             cursor: pointer;
