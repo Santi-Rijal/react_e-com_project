@@ -35,7 +35,17 @@ const router = createBrowserRouter([
         errorElement: <Error />
       },
       {
-        path: "/item",
+        path: "men's-clothing/:id",
+        element: <Item />,
+        errorElement: <Error />
+      },
+      {
+        path: "women's-clothing/:id",
+        element: <Item />,
+        errorElement: <Error />
+      },
+      {
+        path: "jewelry/:id",
         element: <Item />,
         errorElement: <Error />
       }
