@@ -44,7 +44,7 @@ const MenClothing = () => {
     <div className="clothing">
       <div className="items">
         {menClothing.map(itemObj => (
-          <Link className="link" to="/item" state={{ itemObj: itemObj }} key={itemObj.pid}>
+          <Link className="link" to={itemObj.pid} state={{ itemObj: itemObj }} key={itemObj.pid}>
             <ItemCard key={itemObj.pid} itemObj={itemObj} />
           </Link>
         ))}
