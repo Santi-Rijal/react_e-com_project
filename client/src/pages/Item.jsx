@@ -7,6 +7,7 @@ const Item = () => {
   const { itemObj } = location.state || {};
   const [color, setColor] = useState(itemObj.thumb_image || "");
   const [size, setSize] = useState("");
+  let cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
 
   const handleColorClick = (color) => {
     setColor(color);
@@ -14,6 +15,41 @@ const Item = () => {
 
   const handleSizeChange = (size) => {
     setSize(size);
+  }
+
+  const handleAdd = () => {
+    const cartItem = {
+      ...itemObj,
+      thumb_image: color,
+      size: size,
+      quantity: 1
+    }
+
+    const existingCartItem = cart.find(item => (
+      item.pid === cartItem.pid &&
+      item.thumb_image === cartItem.thumb_image &&
+      item.size === cartItem.size
+    ));
+
+    if (existingCartItem) {
+      const updatedCart = cart.map(item => {
+        if (item === existingCartItem) {
+          return {
+            ...item,
+            quantity: item.quantity + 1
+          }
+        }
+
+        return item;
+      });
+
+      cart = updatedCart;
+    }
+    else {
+      cart = [...cart, cartItem];
+    }
+    
+    window.localStorage.setItem("cart-items", JSON.stringify(cart));
   }
 
   return (
@@ -49,7 +85,7 @@ const Item = () => {
           <span className={`size ${size === "3XL" ? "clicked" : ""}`} onClick={() => handleSizeChange("3XL")}>3XL</span>
         </div>
 
-        <button id="add-btn"><FaOpencart /> Add to cart</button>
+        <button id="add-btn" onClick={handleAdd}><FaOpencart /> Add to cart</button>
       </div>
     </div>
   )

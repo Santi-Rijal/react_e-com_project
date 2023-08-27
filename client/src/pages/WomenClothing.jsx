@@ -31,8 +31,6 @@ const WomenClothing = () => {
     fetchData();
   }, [pagenum, start]);
 
-  console.log(womenClothing);
-
   const handlePageChange = (e) => {
     const clickedPage = +e.target.getAttribute("value");
     const start = clickedPage === 1 ? (12 * clickedPage) - 12 : (12 * clickedPage) - 11;
@@ -45,7 +43,7 @@ const WomenClothing = () => {
     <div className="clothing">
       <div className="items">
         {womenClothing.map(itemObj => (
-          <Link className="link" to="/item" state={{ itemObj: itemObj }}>
+          <Link className="link" to="/item" state={{ itemObj: itemObj }} key={itemObj.pid}>
             <ItemCard key={itemObj.pid} itemObj={itemObj} />
           </Link>
         ))}
