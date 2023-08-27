@@ -3,24 +3,43 @@ import React, { useEffect, useState } from 'react'
 import { FaOpencart } from 'react-icons/fa';
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
 
-  const [clickedId, setClickedId] = useState("Home");
+  const [clickedId, setClickedId] = useState("home");
   const [showNavBar, setShowNavBar] = useState(true);
   const [currWindowSize, setCurrWindowSize] = useState(window.innerWidth);
   const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
 
+  const location = useLocation();
+
   // Set the id of what navbar item has been clicked.
-  const onNavItemClick = (navItemId) => {
-    setClickedId(navItemId);
+  const onNavItemClick = (id) => {
+    setClickedId(id);
   }
 
   // Set the status of navbar
   const onUnFoldNav = () => {
     setShowNavBar(prev => !prev);
   }
+
+  useEffect(() => {
+
+    // Handle window reload
+    const handleReload = () => {
+      const id = location.pathname.split("/")[1] || "home";
+      setClickedId(id);
+    }
+
+    // Add event listener when component mounts.
+    window.addEventListener("load", handleReload);
+
+    // Remove event listener when component unmounts.
+    return () => {
+      window.removeEventListener("load", handleReload);
+    }
+  }, [location]);
 
   useEffect(() => {
 
@@ -54,10 +73,10 @@ const NavBar = () => {
           <div className="menu-container">
             <AiOutlineMenuUnfold onClick={onUnFoldNav}/>
             <span>{clickedId}</span>
-            <Link className="link">
+            <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => {onNavItemClick("cart"); onUnFoldNav()}}>
               <div className="cart-container">
                 {cart.length > 0 && <span className="cart-items">{cart.length}</span>}
-                <span className={clickedId === "Cart" ? "clicked" : ""} onClick={() => onNavItemClick("Cart")}><FaOpencart /></span>
+                <span><FaOpencart /></span>
               </div>            
             </Link>
           </div>
@@ -65,52 +84,52 @@ const NavBar = () => {
           currWindowSize < 1220 ? (
             <div className="navbar">
               <AiOutlineMenuFold onClick={onUnFoldNav} id="close-menu"/>
-              <Link className="link" to={"/"}>
-                <span className={clickedId === "Home" ? "clicked" : ""} onClick={() => {onNavItemClick("Home"); onUnFoldNav()}}>Home</span>
+              <Link className={`link ${clickedId === "home" ? "clicked" : ""}`} onClick={() => {onNavItemClick("home"); onUnFoldNav()}} to={"/"}>
+                <span>Home</span>
               </Link>
 
-              <Link className="link" to={"/men's-clothing"}>
-                <span className={clickedId === "Men's Clothing" ? "clicked" : ""} onClick={() => {onNavItemClick("Men's Clothing"); onUnFoldNav()}}>Men's Clothing</span>
+              <Link className={`link ${clickedId === "men's-clothing" ? "clicked" : ""}`} onClick={() => {onNavItemClick("men's-clothing"); onUnFoldNav()}} to={"/men's-clothing"}>
+                <span>Men's Clothing</span>
               </Link>
 
-              <Link className="link" to={"/women's-clothing"}>
-                <span className={clickedId === "Women's Clothing" ? "clicked" : ""} onClick={() => {onNavItemClick("Women's Clothing"); onUnFoldNav()}}>Women's Clothing</span>
+              <Link className={`link ${clickedId === "women's-clothing" ? "clicked" : ""}`} onClick={() => {onNavItemClick("women's-clothing"); onUnFoldNav()}} to={"/women's-clothing"}>
+                <span>Women's Clothing</span>
               </Link>
 
-              <Link className="link" to={"/jewlery"}>
-                <span className={clickedId === "Jewlery" ? "clicked" : ""} onClick={() => {onNavItemClick("Jewelry"); onUnFoldNav()}}>Jewelery</span>
+              <Link className={`link ${clickedId === "jewlery" ? "clicked" : ""}`} onClick={() => {onNavItemClick("jewlery"); onUnFoldNav()}} to={"/jewlery"}>
+                <span>Jewelery</span>
               </Link>
 
-              <Link className="link"  to={"/login"}>
-                <span className={clickedId === "Login" ? "clicked" : ""} id="login" onClick={() => onNavItemClick("Login")}>Login</span>
+              <Link className={`link ${clickedId === "login" ? "clicked" : ""}`} onClick={() => {onNavItemClick("login"); onUnFoldNav()}}  to={"/login"}>
+                <span>Login</span>
               </Link>
             </div>
           ) : (
             <div className="navbar">
-              <Link className={`link ${clickedId === "Home" ? "clicked" : ""}`} onClick={() => onNavItemClick("Home")} to={"/"}>
+              <Link className={`link ${clickedId === "home" ? "clicked" : ""}`} onClick={() => onNavItemClick("home")} to={"/"}>
                 <span >Home</span>
               </Link>
 
-              <Link className={`link ${clickedId === "Men's Clothing" ? "clicked" : ""}`} onClick={() => onNavItemClick("Men's Clothing")} to={"/men's-clothing"}>
+              <Link className={`link ${clickedId === "men's-clothing" ? "clicked" : ""}`} onClick={() => onNavItemClick("men's-clothing")} to={"/men's-clothing"}>
                 <span>Men's Clothing</span>
               </Link>
 
-              <Link className={`link ${clickedId === "Women's Clothing" ? "clicked" : ""}`} onClick={() => onNavItemClick("Women's Clothing")} to={"/women's-clothing"}>
+              <Link className={`link ${clickedId === "women's-clothing" ? "clicked" : ""}`} onClick={() => onNavItemClick("women's-clothing")} to={"/women's-clothing"}>
                 <span>Women's Clothing</span>
               </Link>
 
-              <Link className={`link ${clickedId === "Jewelry" ? "clicked" : ""}`} onClick={() => onNavItemClick("Jewelry")} to={"/jewelry"}>
+              <Link className={`link ${clickedId === "jewelry" ? "clicked" : ""}`} onClick={() => onNavItemClick("jewelry")} to={"/jewelry"}>
                 <span>Jewelry</span>
               </Link>
 
-              <Link className={`link ${clickedId === "Cart" ? "clicked" : ""}`} onClick={() => onNavItemClick("Cart")} to={"/cart"}>
+              <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => onNavItemClick("cart")} to={"/cart"}>
                 <div className="cart-container">
                   {cart.length > 0 && <span className="cart-items">{cart.length}</span>}
                   <span><FaOpencart /></span>
                 </div>
               </Link>
 
-              <Link className={`link ${clickedId === "Login" ? "clicked" : ""}`} id="login" onClick={() => onNavItemClick("Login")} to={"/login"}>
+              <Link className={`link ${clickedId === "Login" ? "clicked" : ""}`} id="login" onClick={() => onNavItemClick("login")} to={"/login"}>
                 <span>Login</span>
               </Link>
             </div>
