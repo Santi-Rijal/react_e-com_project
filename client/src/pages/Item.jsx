@@ -5,11 +5,13 @@ import { FaOpencart } from 'react-icons/fa';
 const Item = () => {
   const location = useLocation();
   const { itemObj } = location.state || {};
-  const [color, setColor] = useState(itemObj.thumb_image || "");
+  const [img, setImg] = useState(itemObj.thumb_image || "");
+  const [color, setColor] = useState(itemObj.variants[0].sku_color_group || "");
   const [size, setSize] = useState("");
   let cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
 
-  const handleColorClick = (color) => {
+  const handleColorClick = (img, color) => {
+    setImg(img);
     setColor(color);
   }
 
@@ -20,9 +22,10 @@ const Item = () => {
   const handleAdd = () => {
     const cartItem = {
       ...itemObj,
-      thumb_image: color,
+      thumb_image: img,
       size: size,
-      quantity: 1
+      quantity: 1,
+      color: color
     }
 
     const existingCartItem = cart.find(item => (
@@ -55,7 +58,7 @@ const Item = () => {
   return (
     <div className="item-page-container">
       <div className="img-container">
-        <img src={color} alt={itemObj.title} />
+        <img src={img} alt={itemObj.title} />
       </div>
       <div className="info-container">
         <div className="info">
@@ -67,7 +70,7 @@ const Item = () => {
         <h3>Colors:</h3>
         <div className="variants">
           {itemObj.variants.map(variant => (
-            <div className={`variant-container ${color === variant.sku_thumb_images[0] ? "clicked" : ""}`} onClick={() => handleColorClick(variant.sku_thumb_images[0])} key={variant.sku_color_group}>
+            <div className={`variant-container ${img === variant.sku_thumb_images[0] ? "clicked" : ""}`} onClick={() => handleColorClick(variant.sku_thumb_images[0], variant.sku_color_group)} key={variant.sku_color_group}>
               <p>{variant.sku_color_group}</p>
               <img src={variant.sku_thumb_images[0]} alt={`${variant.sku_color_group} variant`} />
             </div>

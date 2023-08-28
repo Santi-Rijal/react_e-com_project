@@ -8,6 +8,7 @@ import MenClothing from './pages/MenClothing';
 import WomenClothing from './pages/WomenClothing';
 import Jewelery from './pages/Jewelry';
 import Item from './pages/Item';
+import Cart from './pages/Cart';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
       {
         path: "jewelry/:id",
         element: <Item />,
+        errorElement: <Error />
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
         errorElement: <Error />
       }
     ]
