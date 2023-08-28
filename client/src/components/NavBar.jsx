@@ -10,7 +10,9 @@ const NavBar = () => {
   const [clickedId, setClickedId] = useState("home");
   const [showNavBar, setShowNavBar] = useState(true);
   const [currWindowSize, setCurrWindowSize] = useState(window.innerWidth);
-  const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
+  const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart-items")) || []);
+
+  const changeInCart = JSON.parse(window.localStorage.getItem("cart-items"));
 
   const location = useLocation();
 
@@ -65,6 +67,11 @@ const NavBar = () => {
       setShowNavBar(true);
     }
   }, [currWindowSize]);
+
+  useEffect(() => {
+    const updatedCart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
+    setCart(updatedCart);
+  }, [changeInCart]);
 
   return (
     <div className="navbar-container">
