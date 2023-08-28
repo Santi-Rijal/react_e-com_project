@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
-const CartItem = ({ cartItem }) => {
+const CartItem = ({ cartItem, onCartLengthChange }) => {
   const [q, setQ] = useState(cartItem.quantity);
   const [totalPrice, setTotalPrice] = useState(cartItem.totalPrice);
 
@@ -41,13 +41,14 @@ const CartItem = ({ cartItem }) => {
     const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
 
     const updatedCart = cart.map(item => {
-      if (item.pid === cartItem.pid && item.color === cartItem.color) {
+      if (item.pid === cartItem.pid && item.color === cartItem.color && item.size === cartItem.size) {
         return null;
       }
-      return null;
+      return item;
     }).filter(item => item !== null);
 
     window.localStorage.setItem("cart-items", JSON.stringify(updatedCart));
+    onCartLengthChange();
   }
 
   return (

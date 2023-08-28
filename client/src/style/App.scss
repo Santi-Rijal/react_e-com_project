@@ -872,7 +872,7 @@ html {
 
           display: flex;
           flex-direction: row;
-          flex-wrap: wrap;
+          justify-content: space-evenly;
           column-gap: 10px;
 
           background-color: $bg-color;
@@ -885,7 +885,7 @@ html {
 
           .img-container {
             box-sizing: border-box;
-            width: 10%;
+            width: 20%;
 
             position: relative;
 
@@ -898,11 +898,18 @@ html {
             }
           }
 
+          .name-color-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
           .quantity-container {
             display: flex;
             flex-direction: row;
             align-items: center;
-            column-gap: 20px;
+            column-gap: 10px;
 
             svg {
               font-size: 1.3rem;
@@ -932,18 +939,23 @@ html {
             }
           }
 
+          .size-price-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+
           .delete-container {
             font-size: 1.3rem;
-
             
             svg {
               position: relative;
               top: calc(100% - 97%);
-            }
-            
-            &:hover {
-              color: $error;
-              cursor: pointer;
+
+              &:hover {
+                color: $error;
+                cursor: pointer;
+              }
             }
           }
         }
