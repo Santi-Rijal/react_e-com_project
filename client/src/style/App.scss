@@ -872,8 +872,8 @@ html {
 
           display: flex;
           flex-direction: row;
-          justify-content: space-evenly;
-          align-items: center;
+          flex-wrap: wrap;
+          column-gap: 10px;
 
           background-color: $bg-color;
           
@@ -884,7 +884,6 @@ html {
           padding: 5px;
 
           .img-container {
-            border: 1px dashed green;
             box-sizing: border-box;
             width: 10%;
 
@@ -895,6 +894,7 @@ html {
 
             img {
               width: 100%;
+              border-radius: 5px;
             }
           }
 
@@ -928,6 +928,22 @@ html {
               text-align: center;
               outline: none;
               border: none;
+              border-radius: 5px;
+            }
+          }
+
+          .delete-container {
+            font-size: 1.3rem;
+
+            
+            svg {
+              position: relative;
+              top: calc(100% - 97%);
+            }
+            
+            &:hover {
+              color: $error;
+              cursor: pointer;
             }
           }
         }

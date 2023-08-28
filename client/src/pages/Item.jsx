@@ -25,7 +25,8 @@ const Item = () => {
       thumb_image: img,
       size: size,
       quantity: 1,
-      color: color
+      color: color,
+      totalPrice: itemObj.price
     }
 
     const existingCartItem = cart.find(item => (
@@ -39,7 +40,8 @@ const Item = () => {
         if (item === existingCartItem) {
           return {
             ...item,
-            quantity: item.quantity + 1
+            quantity: item.quantity + 1,
+            totalPrice: (item.quantity + 1) * item.price
           }
         }
 

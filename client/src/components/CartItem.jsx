@@ -1,29 +1,54 @@
 import React, { useEffect, useState } from 'react';
 
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { RxCross2 } from 'react-icons/rx';
 
 const CartItem = ({ cartItem }) => {
   const [q, setQ] = useState(cartItem.quantity);
+  const [totalPrice, setTotalPrice] = useState(cartItem.totalPrice);
 
   const handleQuantityChange = (type) => {
-    setQ(prevQ => (type === "add" ? prevQ + 1 : prevQ - 1));
+    if (type === "add") {
+      const newQuantity = q + 1;
+      setTotalPrice(newQuantity * cartItem.price);
+      setQ(newQuantity);
+    }
+    else if (type === "sub" && q > 1) {
+      const newQuantity = q - 1;
+      setTotalPrice(newQuantity * cartItem.price);
+      setQ(newQuantity);
+    }
   }
 
   useEffect(() => {
-    let cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
+    const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
 
     const updatedCart = cart.map(item => {
       if (item.pid === cartItem.pid && item.color === cartItem.color) {
         return {
           ...item,
-          quantity: q
+          quantity: q,
+          totalPrice: totalPrice
         }
       }
       return item;
     });
 
     window.localStorage.setItem("cart-items", JSON.stringify(updatedCart));
-  }, [q, cartItem]);
+  }, [q, cartItem, totalPrice]);
+
+  const handleDelete = () => {
+    const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
+
+    const updatedCart = cart.map(item => {
+      if (item.pid === cartItem.pid && item.color === cartItem.color) {
+        return null;
+      }
+      return null;
+    }).filter(item => item !== null);
+
+    window.localStorage.setItem("cart-items", JSON.stringify(updatedCart));
+  }
 
   return (
     <div className="cart-item-container">
@@ -42,8 +67,12 @@ const CartItem = ({ cartItem }) => {
         <AiOutlinePlus onClick={() => handleQuantityChange("add")}/>
       </div>
 
-      <div className="size-container">
+      <div className="size-price-container">
         <p>Size: {cartItem.size}</p>
+        <p>Price: ${totalPrice}</p>
+      </div>
+      <div className="delete-container">
+        <RxCross2 title="Delete" onClick={handleDelete}/>
       </div>
     </div>
   )
