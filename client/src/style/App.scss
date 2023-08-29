@@ -963,6 +963,7 @@ html {
       .checkout {
         box-sizing: border-box;
         width: 37%;
+        height: max-content;
         padding: 20px;
 
         background-color: $bg-color;

@@ -1,44 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
 import { Context } from '../context/ContextProvider.js';
 
-const CartItem = ({ cartItem, onQuantityChange }) => {
-  const [q, setQ] = useState(cartItem.quantity);
-  const [totalPrice, setTotalPrice] = useState(cartItem.totalPrice);
-
+const CartItem = ({ cartItem }) => {
   const { cart, updateCart } = useContext(Context);
 
   const handleQuantityChange = (type) => {
-    if (type === "add") {
-      const newQuantity = q + 1;
-      setTotalPrice(newQuantity * cartItem.price);
-      setQ(newQuantity);
-    }
-    else if (type === "sub" && q > 1) {
-      const newQuantity = q - 1;
-      setTotalPrice(newQuantity * cartItem.price);
-      setQ(newQuantity);
-    }
-  }
+    let newQuantity = cartItem.quantity;
+    let newTotal = cartItem.totalPrice;
 
-  useEffect(() => {
+    if (type === "add") {
+      newQuantity += 1;
+      newTotal = newQuantity * cartItem.price;
+    }
+    else if (type === "sub" && newQuantity > 1) {
+      newQuantity -= 1;
+      newTotal = newQuantity * cartItem.price;
+    }
+    else {
+      return;
+    }
+
     const updatedCart = cart.map(item => {
-      if (item.pid === cartItem.pid && item.color === cartItem.color) {
+      if (item.pid === cartItem.pid && item.color === cartItem.color && item.size === cartItem.size) {
         return {
           ...item,
-          quantity: q,
-          totalPrice: totalPrice
+          quantity: newQuantity,
+          totalPrice: newTotal
         }
       }
       return item;
     });
 
     updateCart(updatedCart);
-    onQuantityChange();
-  }, [q, cartItem, totalPrice, onQuantityChange, cart, updateCart]);
+  }
 
   const handleDelete = () => {
     const updatedCart = cart.map(item => {
@@ -64,13 +62,13 @@ const CartItem = ({ cartItem, onQuantityChange }) => {
 
       <div className="quantity-container">
         <AiOutlineMinus onClick={() => handleQuantityChange("sub")}/>
-        <input type="text" value={q} readOnly/>
+        <input type="text" value={cartItem.quantity} readOnly/>
         <AiOutlinePlus onClick={() => handleQuantityChange("add")}/>
       </div>
 
       <div className="size-price-container">
         <p>Size: {cartItem.size}</p>
-        <p>Price: ${totalPrice}</p>
+        <p>Price: ${cartItem.totalPrice}</p>
       </div>
       <div className="delete-container">
         <RxCross2 title="Delete" onClick={handleDelete}/>
