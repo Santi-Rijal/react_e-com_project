@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { FaOpencart } from 'react-icons/fa';
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
 
 import { Link, useLocation } from 'react-router-dom';
 
+import { Context } from '../context/ContextProvider.js';
+
 const NavBar = () => {
 
   const [clickedId, setClickedId] = useState("home");
   const [showNavBar, setShowNavBar] = useState(true);
   const [currWindowSize, setCurrWindowSize] = useState(window.innerWidth);
-  const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart-items")) || []);
 
-  const changeInCart = JSON.parse(window.localStorage.getItem("cart-items"));
+  const { cart } = useContext(Context);
 
   const location = useLocation();
 
@@ -68,10 +69,9 @@ const NavBar = () => {
     }
   }, [currWindowSize]);
 
-  useEffect(() => {
-    const updatedCart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
-    setCart(updatedCart);
-  }, [changeInCart]);
+  const totalItemsInCart = () => {
+    return cart.reduce((acc, item) => acc + item.quantity, 0);
+  }
 
   return (
     <div className="navbar-container">
@@ -82,7 +82,7 @@ const NavBar = () => {
             <span>{clickedId}</span>
             <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => {onNavItemClick("cart"); onUnFoldNav()}}>
               <div className="cart-container">
-                {cart.length > 0 && <span className="cart-items">{cart.length}</span>}
+                {cart.length > 0 && <span className="cart-items">{totalItemsInCart()}</span>}
                 <span><FaOpencart /></span>
               </div>            
             </Link>
@@ -131,7 +131,7 @@ const NavBar = () => {
 
               <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => onNavItemClick("cart")} to={"/cart"}>
                 <div className="cart-container">
-                  {cart.length > 0 && <span className="cart-items">{cart.length}</span>}
+                  {cart.length > 0 && <span className="cart-items">{totalItemsInCart()}</span>}
                   <span><FaOpencart /></span>
                 </div>
               </Link>

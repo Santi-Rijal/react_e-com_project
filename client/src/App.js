@@ -9,6 +9,7 @@ import WomenClothing from './pages/WomenClothing';
 import Jewelery from './pages/Jewelry';
 import Item from './pages/Item';
 import Cart from './pages/Cart';
+import { ContextProvider } from './context/ContextProvider.js';
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,9 @@ function App() {
         <p className="logo">NovaMall</p>
         <span className="blur" id="bottom-blur"/>
       </div>
-      <RouterProvider router={router} />
+      <ContextProvider>
+        <RouterProvider router={router} />
+      </ContextProvider>
     </div>
   );
 }

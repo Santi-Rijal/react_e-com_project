@@ -851,14 +851,13 @@ html {
 
       border-radius: 20px;
 
-      // display: flex;
-      // flex-direction: row;
-      // justify-content: space-between;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
       color: $text-color;
 
       .cart-items-container {
-        border: 1px dashed rebeccapurple;
         box-sizing: border-box;
 
         width: 60%;
@@ -957,6 +956,89 @@ html {
                 cursor: pointer;
               }
             }
+          }
+        }
+      }
+
+      .checkout {
+        box-sizing: border-box;
+        width: 37%;
+        padding: 20px;
+
+        background-color: $bg-color;
+        
+        border-radius: 10px;
+        border: 1px solid $logo-color;
+        box-shadow: 0 0 10px $bg-color;
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        hr {
+          border: 1px solid $logo-color;
+          width: 100%;
+        }
+
+        .space-between {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        #tax {
+          margin-top: 30px;
+          font-size: 0.9rem;
+        }
+
+        button {
+          box-sizing: border-box;
+          background-color: $logo-bg-color;
+          color: $text-color;
+
+          border: 1px solid $logo-color;
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+
+          width: 100%;
+          padding: 20px;
+
+          &:hover {
+            color: $hover-color;
+            box-shadow: 0 0 10px $hover-color;
+            cursor: pointer;
+          }
+
+          &:active {
+            color: $logo-color;
+          }
+        }
+
+        .payment-acceptance {
+          display: flex;
+          flex-direction: column;
+
+          .payment-types {
+            display: flex;
+            flex-direction: row;
+            column-gap: 10px;
+            flex-wrap: wrap;
+
+            font-size: 1.7rem;
+
+            color: $logo-color;
+          }
+
+          & + p {
+            font-size: 0.7rem;
+          }
+        }
+
+        #return-policy {
+          font-size: 0.7rem;
+
+          #link {
+            text-decoration: underline $logo-color;
           }
         }
       }

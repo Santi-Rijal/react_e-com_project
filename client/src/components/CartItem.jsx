@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
-const CartItem = ({ cartItem, onCartLengthChange }) => {
+import { Context } from '../context/ContextProvider.js';
+
+const CartItem = ({ cartItem, onQuantityChange }) => {
   const [q, setQ] = useState(cartItem.quantity);
   const [totalPrice, setTotalPrice] = useState(cartItem.totalPrice);
+
+  const { cart, updateCart } = useContext(Context);
 
   const handleQuantityChange = (type) => {
     if (type === "add") {
@@ -21,8 +25,6 @@ const CartItem = ({ cartItem, onCartLengthChange }) => {
   }
 
   useEffect(() => {
-    const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
-
     const updatedCart = cart.map(item => {
       if (item.pid === cartItem.pid && item.color === cartItem.color) {
         return {
@@ -34,12 +36,11 @@ const CartItem = ({ cartItem, onCartLengthChange }) => {
       return item;
     });
 
-    window.localStorage.setItem("cart-items", JSON.stringify(updatedCart));
-  }, [q, cartItem, totalPrice]);
+    updateCart(updatedCart);
+    onQuantityChange();
+  }, [q, cartItem, totalPrice, onQuantityChange, cart, updateCart]);
 
   const handleDelete = () => {
-    const cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
-
     const updatedCart = cart.map(item => {
       if (item.pid === cartItem.pid && item.color === cartItem.color && item.size === cartItem.size) {
         return null;
@@ -47,8 +48,7 @@ const CartItem = ({ cartItem, onCartLengthChange }) => {
       return item;
     }).filter(item => item !== null);
 
-    window.localStorage.setItem("cart-items", JSON.stringify(updatedCart));
-    onCartLengthChange();
+    updateCart(updatedCart);
   }
 
   return (

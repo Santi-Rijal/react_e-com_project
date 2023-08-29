@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FaOpencart } from 'react-icons/fa';
+import { Context } from '../context/ContextProvider';
 
 const Item = () => {
   const location = useLocation();
@@ -8,7 +9,8 @@ const Item = () => {
   const [img, setImg] = useState(itemObj.thumb_image || "");
   const [color, setColor] = useState(itemObj.variants[0].sku_color_group || "");
   const [size, setSize] = useState("");
-  let cart = JSON.parse(window.localStorage.getItem("cart-items")) || [];
+
+  const { cart, updateCart } = useContext(Context);
 
   const handleColorClick = (img, color) => {
     setImg(img);
@@ -29,6 +31,8 @@ const Item = () => {
       totalPrice: itemObj.price
     }
 
+    let cartRef = cart;
+
     const existingCartItem = cart.find(item => (
       item.pid === cartItem.pid &&
       item.thumb_image === cartItem.thumb_image &&
@@ -48,13 +52,13 @@ const Item = () => {
         return item;
       });
 
-      cart = updatedCart;
+      cartRef = updatedCart;
     }
     else {
-      cart = [...cart, cartItem];
+      cartRef = [...cart, cartItem];
     }
     
-    window.localStorage.setItem("cart-items", JSON.stringify(cart));
+    updateCart(cartRef);
   }
 
   return (
