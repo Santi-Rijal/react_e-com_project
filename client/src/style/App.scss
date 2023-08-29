@@ -838,6 +838,213 @@ html {
       }
     }
 
+    // Cart page container
+    .cart-page-container {
+      box-sizing: border-box;
+
+      width: 70%;
+      margin: 25px 0;
+      padding: 40px 40px;
+
+      background-color: $logo-bg-color;
+      box-shadow: 0 0 10px $hover-color;
+
+      border-radius: 20px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      color: $text-color;
+
+      .cart-items-container {
+        box-sizing: border-box;
+
+        width: 60%;
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+
+        .cart-item-container {
+          box-sizing: border-box;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          column-gap: 10px;
+
+          background-color: $bg-color;
+          
+          border: 1px solid $logo-color;
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+
+          padding: 5px;
+
+          .img-container {
+            box-sizing: border-box;
+            width: 20%;
+
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+
+            img {
+              width: 100%;
+              border-radius: 5px;
+            }
+          }
+
+          .name-color-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
+          .quantity-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 10px;
+
+            svg {
+              font-size: 1.3rem;
+              color: $text-color;
+              padding: 4px;
+              border-radius: 5px;
+
+              &:hover {
+                background-color: $logo-bg-color;
+                cursor: pointer;
+                color: $hover-color;
+                box-shadow: 0 0 5px $hover-color;
+              }
+
+              &:active {
+                color: $logo-color;
+              }
+            }
+
+            input {
+              width: 40px;
+              padding: 4px 0;
+              text-align: center;
+              outline: none;
+              border: none;
+              border-radius: 5px;
+            }
+          }
+
+          .size-price-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .delete-container {
+            font-size: 1.3rem;
+            
+            svg {
+              position: relative;
+              top: calc(100% - 97%);
+
+              &:hover {
+                color: $error;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      .checkout {
+        box-sizing: border-box;
+        width: 37%;
+        height: max-content;
+        padding: 20px;
+
+        background-color: $bg-color;
+        
+        border-radius: 10px;
+        border: 1px solid $logo-color;
+        box-shadow: 0 0 10px $bg-color;
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        hr {
+          border: 1px solid $logo-color;
+          width: 100%;
+        }
+
+        .space-between {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        #tax {
+          margin-top: 30px;
+          font-size: 0.9rem;
+        }
+
+        button {
+          box-sizing: border-box;
+          background-color: $logo-bg-color;
+          color: $text-color;
+
+          border: 1px solid $logo-color;
+          border-radius: 10px;
+          box-shadow: 0 0 10px $bg-color;
+
+          width: 100%;
+          padding: 20px;
+
+          &:hover {
+            color: $hover-color;
+            box-shadow: 0 0 10px $hover-color;
+            cursor: pointer;
+          }
+
+          &:active {
+            color: $logo-color;
+          }
+        }
+
+        .payment-acceptance {
+          display: flex;
+          flex-direction: column;
+
+          .payment-types {
+            display: flex;
+            flex-direction: row;
+            column-gap: 10px;
+            flex-wrap: wrap;
+
+            font-size: 1.7rem;
+
+            color: $logo-color;
+          }
+
+          & + p {
+            font-size: 0.7rem;
+          }
+        }
+
+        #return-policy {
+          font-size: 0.7rem;
+
+          #link {
+            text-decoration: underline $logo-color;
+          }
+        }
+      }
+    }
+
     // Footer container.
     .footer-container {
       width: 100%;
