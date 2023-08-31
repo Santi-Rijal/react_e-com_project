@@ -55,21 +55,24 @@ const CartItem = ({ cartItem }) => {
         <img src={cartItem.thumb_image} alt={cartItem.title} />
       </div>
 
-      <div className="name-color-container">
-        <p>{cartItem.title}</p>
-        <p>Color: {cartItem.color}</p>
+      <div className="info-container">
+        <div className="name-color-container">
+          <p>{cartItem.title}</p>
+        </div>
+
+        <div className="secondary-info">
+          <p>Color: {cartItem.color}</p>
+          <p>Size: {cartItem.size}</p>
+          <p>Price: ${cartItem.totalPrice}</p>
+        </div>
+
+        <div className="quantity-container">
+          <AiOutlineMinus onClick={() => handleQuantityChange("sub")}/>
+          <input type="text" value={cartItem.quantity} readOnly/>
+          <AiOutlinePlus onClick={() => handleQuantityChange("add")}/>
+        </div>
       </div>
 
-      <div className="quantity-container">
-        <AiOutlineMinus onClick={() => handleQuantityChange("sub")}/>
-        <input type="text" value={cartItem.quantity} readOnly/>
-        <AiOutlinePlus onClick={() => handleQuantityChange("add")}/>
-      </div>
-
-      <div className="size-price-container">
-        <p>Size: {cartItem.size}</p>
-        <p>Price: ${cartItem.totalPrice}</p>
-      </div>
       <div className="delete-container">
         <RxCross2 title="Delete" onClick={handleDelete}/>
       </div>

@@ -80,7 +80,7 @@ const NavBar = () => {
           <div className="menu-container">
             <AiOutlineMenuUnfold onClick={onUnFoldNav}/>
             <span>{clickedId}</span>
-            <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => {onNavItemClick("cart"); onUnFoldNav()}}>
+            <Link className={`link ${clickedId === "cart" ? "clicked" : ""}`} onClick={() => onNavItemClick("cart")} to={"/cart"}>
               <div className="cart-container">
                 {cart.length > 0 && <span className="cart-items">{totalItemsInCart()}</span>}
                 <span><FaOpencart /></span>

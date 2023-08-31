@@ -857,14 +857,31 @@ html {
 
       color: $text-color;
 
+      @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+        width: 90%;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+
+      @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+        width: 100%;
+
+        box-shadow: none;
+        border-radius: 0;
+
+        flex-direction: column;
+        row-gap: 10px;
+      }
+
       .cart-items-container {
         box-sizing: border-box;
-
-        width: 60%;
-
         display: flex;
         flex-direction: column;
         row-gap: 10px;
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-tablet) {
+          width: 100%;
+        }
 
         .cart-item-container {
           box-sizing: border-box;
@@ -872,7 +889,7 @@ html {
           display: flex;
           flex-direction: row;
           justify-content: space-evenly;
-          column-gap: 10px;
+          column-gap: 20px;
 
           background-color: $bg-color;
           
@@ -880,7 +897,12 @@ html {
           border-radius: 10px;
           box-shadow: 0 0 10px $bg-color;
 
-          padding: 5px;
+          padding: 10px;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            column-gap: 10px;
+            padding: 5px;
+          }
 
           .img-container {
             box-sizing: border-box;
@@ -891,57 +913,78 @@ html {
             display: flex;
             justify-content: center;
 
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              width: 25%;
+            }
+
             img {
               width: 100%;
               border-radius: 5px;
             }
           }
 
-          .name-color-container {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            justify-content: center;
-          }
+          .info-container {
+            width: 100%;
+            
+            p {
+              margin: 0;
+            }
 
-          .quantity-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            column-gap: 10px;
-
-            svg {
-              font-size: 1.3rem;
-              color: $text-color;
-              padding: 4px;
-              border-radius: 5px;
-
-              &:hover {
-                background-color: $logo-bg-color;
-                cursor: pointer;
-                color: $hover-color;
-                box-shadow: 0 0 5px $hover-color;
-              }
-
-              &:active {
-                color: $logo-color;
+            .secondary-info {
+              opacity: 0.75;
+              margin-top: 10px;
+              font-size: 0.9rem;
+              
+              @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+                font-size: 0.75rem;
+                opacity: 0.9;
               }
             }
 
-            input {
-              width: 40px;
-              padding: 4px 0;
-              text-align: center;
-              outline: none;
-              border: none;
-              border-radius: 5px;
-            }
-          }
+            .quantity-container {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              column-gap: 10px;
+              margin-top: 15px;
+  
+              svg {
+                font-size: 1.3rem;
+                color: $text-color;
+                padding: 4px;
+                border-radius: 5px;
 
-          .size-price-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+                @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+                  font-size: 1rem;
+                }
+  
+                &:hover {
+                  background-color: $logo-bg-color;
+                  cursor: pointer;
+                  color: $hover-color;
+                  box-shadow: 0 0 5px $hover-color;
+                }
+  
+                &:active {
+                  color: $logo-color;
+                }
+              }
+  
+              input {
+                width: 40px;
+                padding: 4px 0;
+                text-align: center;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+
+                @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+                  font-size: 1rem;
+                  padding: 2px 0;
+                }
+              }
+            }
+
           }
 
           .delete-container {
@@ -962,7 +1005,7 @@ html {
 
       .checkout {
         box-sizing: border-box;
-        width: 37%;
+        width: 40%;
         height: max-content;
         padding: 20px;
 
@@ -975,6 +1018,10 @@ html {
         display: flex;
         flex-direction: column;
         row-gap: 5px;
+
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-tablet) {
+          width: 100%;
+        }
 
         hr {
           border: 1px solid $logo-color;
