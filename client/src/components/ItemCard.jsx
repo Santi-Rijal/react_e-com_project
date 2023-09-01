@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const Item = ({ itemObj }) => {
+// A component representing the "itemObj" clothing/jewelry.
+const ItemCard = ({ itemObj }) => {
   return (
     <div className="item-container">
       <div className="img-container">
@@ -12,7 +13,7 @@ const Item = ({ itemObj }) => {
         <p>${itemObj.price}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Item
+export default ItemCard;

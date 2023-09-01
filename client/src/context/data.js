@@ -1,13 +1,13 @@
-import men1 from '../imgs/men1.jpg';
-import men2 from '../imgs/men2.jpg';
-import men3 from '../imgs/men3.jpg';
-import women1 from '../imgs/women1.jpg';
-import women2 from '../imgs/women2.jpg';
-import women3 from '../imgs/women3.jpg';
-import j1 from '../imgs/j1.jpg';
-import j2 from '../imgs/j2.jpg';
-import j3 from '../imgs/j3.jpg';
-import j4 from '../imgs/j4.jpg';
+import men1 from "../imgs/men1.jpg";
+import men2 from "../imgs/men2.jpg";
+import men3 from "../imgs/men3.jpg";
+import women1 from "../imgs/women1.jpg";
+import women2 from "../imgs/women2.jpg";
+import women3 from "../imgs/women3.jpg";
+import j1 from "../imgs/j1.jpg";
+import j2 from "../imgs/j2.jpg";
+import j3 from "../imgs/j3.jpg";
+import j4 from "../imgs/j4.jpg";
 
 const data = {
   menHeros: [
@@ -17,7 +17,7 @@ const data = {
       header: "Classic Comfort",
       subHeader: "Explore our Stylish Men's Turtleneck Collection",
       action: "SHOP NOW",
-      img: men1
+      img: men1,
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const data = {
       header: "Elevate Your Style",
       subHeader: "Discover the Finest Collection of Men's Blazers",
       action: "SHOP NOW",
-      img: men2
+      img: men2,
     },
     {
       id: 3,
@@ -33,8 +33,8 @@ const data = {
       header: "Adventure Awaits",
       subHeader: "Discover Our Stylish Backpack Collection",
       action: "SHOP NOW",
-      img: men3
-    }
+      img: men3,
+    },
   ],
   womenHeros: [
     {
@@ -43,7 +43,7 @@ const data = {
       header: "Chic in Wheat",
       subHeader: "Discover the Latest Wheat-Colored Tops Collection",
       action: "SHOP NOW",
-      img: women1
+      img: women1,
     },
     {
       id: 2,
@@ -51,7 +51,7 @@ const data = {
       header: "Elegant Dresses for Every Occasion",
       subHeader: "Explore Our Collection of Stylish Dresses",
       action: "SHOP NOW",
-      img: women2
+      img: women2,
     },
     {
       id: 3,
@@ -59,8 +59,8 @@ const data = {
       header: "Elegance Meets Comfort",
       subHeader: "Explore Our Stunning Collection of Women's Heels",
       action: "SHOP NOW",
-      img: women3
-    }
+      img: women3,
+    },
   ],
   jewelsHeros: [
     {
@@ -69,7 +69,7 @@ const data = {
       header: "Captivating Elegance",
       subHeader: "Explore Our Exquisite Collection of Women's Emerald Rings",
       action: "SHOP NOW",
-      img: j1
+      img: j1,
     },
     {
       id: 2,
@@ -77,7 +77,7 @@ const data = {
       header: "Distinctive Accessories",
       subHeader: "Discover Our Collection of Stylish Men's Necklaces",
       action: "SHOP NOW",
-      img: j2
+      img: j2,
     },
     {
       id: 3,
@@ -85,7 +85,7 @@ const data = {
       header: "Elegance in Every Facet",
       subHeader: "Explore Our Collection of Exquisite Women's Diamond Rings",
       action: "SHOP NOW",
-      img: j3
+      img: j3,
     },
     {
       id: 4,
@@ -93,9 +93,9 @@ const data = {
       header: "Timeless Elegance",
       subHeader: "Explore Our Collection of Stylish Men's Watches",
       action: "SHOP NOW",
-      img: j4
-    }
-  ]
-}
+      img: j4,
+    },
+  ],
+};
 
 export default data;

@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { RxCross2 } from 'react-icons/rx';
+// Icons
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 
-import { Context } from '../context/ContextProvider.js';
+// Context
+import { Context } from "../context/ContextProvider.js";
 
+// Component representing the "cartItem" in user's cart and it's functions.
 const CartItem = ({ cartItem }) => {
   const { cart, updateCart } = useContext(Context);
 
+  // A function used to increase/decrease the qunatity of "cartItem" in cart.
   const handleQuantityChange = (type) => {
     let newQuantity = cartItem.quantity;
     let newTotal = cartItem.totalPrice;
@@ -15,39 +19,52 @@ const CartItem = ({ cartItem }) => {
     if (type === "add") {
       newQuantity += 1;
       newTotal = newQuantity * cartItem.price;
-    }
-    else if (type === "sub" && newQuantity > 1) {
+    } else if (type === "sub" && newQuantity > 1) {
       newQuantity -= 1;
       newTotal = newQuantity * cartItem.price;
-    }
-    else {
+    } else {
       return;
     }
 
-    const updatedCart = cart.map(item => {
-      if (item.pid === cartItem.pid && item.color === cartItem.color && item.size === cartItem.size) {
+    // A map function is used to iterate over the cart and for each item, if it's the "cartItem", update it's properties.
+    const updatedCart = cart.map((item) => {
+      if (matchItem(item)) {
         return {
           ...item,
           quantity: newQuantity,
-          totalPrice: newTotal
-        }
+          totalPrice: newTotal,
+        };
       }
       return item;
     });
 
-    updateCart(updatedCart);
-  }
+    updateCart(updatedCart); // Save the updated cart as the new cart.
+  };
 
+  // A function used delete "cartItem" from cart.
   const handleDelete = () => {
-    const updatedCart = cart.map(item => {
-      if (item.pid === cartItem.pid && item.color === cartItem.color && item.size === cartItem.size) {
-        return null;
-      }
-      return item;
-    }).filter(item => item !== null);
+    // Using map function, find the "cartItem" in cart and replace it null. Then on the new array containing null,
+    // useing filter, return a new array without any null values.
+    const updatedCart = cart
+      .map((item) => {
+        if (matchItem(item)) {
+          return null;
+        }
+        return item;
+      })
+      .filter((item) => item !== null);
 
-    updateCart(updatedCart);
-  }
+    updateCart(updatedCart); // Save the updated cart as the new cart.
+  };
+
+  // A function used to determine if the passed "item" is the "cartItem".
+  const matchItem = (item) => {
+    return (
+      item.pid === cartItem.pid &&
+      item.color === cartItem.color &&
+      item.size === cartItem.size
+    );
+  };
 
   return (
     <div className="cart-item-container">
@@ -55,26 +72,27 @@ const CartItem = ({ cartItem }) => {
         <img src={cartItem.thumb_image} alt={cartItem.title} />
       </div>
 
-      <div className="name-color-container">
+      <div className="info-container">
         <p>{cartItem.title}</p>
-        <p>Color: {cartItem.color}</p>
+
+        <div className="secondary-info">
+          <p>Color: {cartItem.color}</p>
+          <p>Size: {cartItem.size}</p>
+          <p>Price: ${cartItem.totalPrice}</p>
+        </div>
+
+        <div className="quantity-container">
+          <AiOutlineMinus onClick={() => handleQuantityChange("sub")} />
+          <input type="text" value={cartItem.quantity} readOnly />
+          <AiOutlinePlus onClick={() => handleQuantityChange("add")} />
+        </div>
       </div>
 
-      <div className="quantity-container">
-        <AiOutlineMinus onClick={() => handleQuantityChange("sub")}/>
-        <input type="text" value={cartItem.quantity} readOnly/>
-        <AiOutlinePlus onClick={() => handleQuantityChange("add")}/>
-      </div>
-
-      <div className="size-price-container">
-        <p>Size: {cartItem.size}</p>
-        <p>Price: ${cartItem.totalPrice}</p>
-      </div>
       <div className="delete-container">
-        <RxCross2 title="Delete" onClick={handleDelete}/>
+        <RxCross2 title="Delete" onClick={handleDelete} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CartItem
+export default CartItem;
