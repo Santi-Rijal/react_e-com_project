@@ -1,5 +1,6 @@
-import React from 'react'
+import React from "react";
 
+// A component representing an hero item based on the "heroObj"
 const Hero = ({ heroObj }) => {
   return (
     <div className="hero-container">
@@ -13,7 +14,7 @@ const Hero = ({ heroObj }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
