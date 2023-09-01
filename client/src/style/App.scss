@@ -51,6 +51,10 @@ html {
 
   font-family: "Caviar Dreams";
 
+  #error {
+    color: $error;
+  }
+
 
   .link {
     text-decoration: none;
@@ -825,14 +829,20 @@ html {
             font-size: 1.3rem;
           }
 
-          &:hover {
-            cursor: pointer;
-            box-shadow: 0 0 5px $hover-color;
-            color: $hover-color;
+          &:enabled {
+            &:hover {
+              cursor: pointer;
+              box-shadow: 0 0 5px $hover-color;
+              color: $hover-color;
+            }
+  
+            &:active {
+              color: $logo-color;
+            }
           }
 
-          &:active {
-            color: $logo-color;
+          &:disabled {
+            opacity: 0.8;
           }
         }
       }
