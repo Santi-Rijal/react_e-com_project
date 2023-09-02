@@ -5,12 +5,12 @@ const ItemCard = ({ itemObj }) => {
   return (
     <div className="item-container">
       <div className="img-container">
-        <img src={itemObj.thumb_image} alt={itemObj.title} />
+        <img src={itemObj.DefaultProductImage} alt={itemObj.DisplayName} />
       </div>
       <div className="info">
         <hr />
-        <h3>{itemObj.title}</h3>
-        <p>${itemObj.price}</p>
+        <h3>{itemObj.DisplayName}</h3>
+        <p>${itemObj.OriginalPrice}</p>
       </div>
     </div>
   );

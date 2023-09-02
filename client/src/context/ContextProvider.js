@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("cart-items")) || []
   );
   const [clickedId, setClickedId] = useState("home");
+  const [catWomen, setCatWomen] = useState("women_main");
 
   // A function used to set a new cart as well as save it to local storage.
   const updateCart = (newCart) => {
@@ -19,9 +20,21 @@ export const ContextProvider = ({ children }) => {
     setClickedId(id);
   };
 
+  // A function to set current caterogy filter for women's page.
+  const updateWomenCat = (cat) => {
+    setCatWomen(cat);
+  }
+
   return (
     <Context.Provider
-      value={{ cart, clickedId, updateCart, updateClickedNavId }}
+      value={{
+        cart,
+        clickedId,
+        catWomen,
+        updateCart,
+        updateClickedNavId,
+        updateWomenCat,
+      }}
     >
       {children}
     </Context.Provider>

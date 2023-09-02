@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 // Components.
 import ItemCard from "../components/ItemCard";
+import MoreOptions from "../components/MoreOptions";
+
+// Context.
+import { Context } from "../context/ContextProvider";
 
 // A page containing all the women's clothing.
 const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
   const [pagenum, setPagenum] = useState(1);
-  const [start, setStart] = useState(0);
+
+  const { catWomen } = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=clothing&rows=12&start=${start}&gender=Female`;
       const options = {
-        method: "GET",
+        method: 'GET',
+        url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list',
+        params: {
+          category: catWomen,
+          pageSize: '9',
+          pageNumber: pagenum,
+          sortby: '1'
+        },
         headers: {
           "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
           "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
-        },
-      };
+        }
+      }
 
       try {
-        const res = await axios.request(url, options);
-        const data = await res.data.response.docs;
+        const res = await axios.request(options);
+        const data = await res.data.CatalogProducts;
         setWomenClothing(data);
       } catch (error) {
         console.error(error);
@@ -32,31 +43,30 @@ const WomenClothing = () => {
     };
 
     fetchData();
-  }, [pagenum, start]);
+  }, [pagenum, catWomen]);
 
   // A function that handles page changes.
   const handlePageChange = (e) => {
     const clickedPage = +e.target.getAttribute("value"); // Get which page we are on.
-    const start =
-      clickedPage === 1 ? 12 * clickedPage - 12 : 12 * clickedPage - 11; // Starting row for the api.
-
-    setStart(start);
     setPagenum(clickedPage);
   };
 
   return (
     <div className="clothing">
-      <div className="items">
-        {womenClothing.map((itemObj) => (
-          <Link
-            className="link"
-            to={itemObj.pid}
-            state={{ itemObj: itemObj }}
-            key={itemObj.pid}
-          >
-            <ItemCard key={itemObj.pid} itemObj={itemObj} />
-          </Link>
-        ))}
+      <div className="items-container">
+        <MoreOptions />
+        <div className="items">
+          {womenClothing.map((itemObj) => (
+            <Link
+              className="link"
+              to={itemObj.ProductId}
+              state={{ itemObj: itemObj }}
+              key={itemObj.ProductId}
+            >
+              <ItemCard itemObj={itemObj} />
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="pages">

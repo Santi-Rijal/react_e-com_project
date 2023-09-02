@@ -32,17 +32,17 @@ const router = createBrowserRouter([
         errorElement: <Error />
       },
       {
+        path: "women's-clothing/:id",
+        element: <Item />,
+        errorElement: <Error />
+      },
+      {
         path: "/jewelry",
         element: <Jewelery />,
         errorElement: <Error />
       },
       {
         path: "men's-clothing/:id",
-        element: <Item />,
-        errorElement: <Error />
-      },
-      {
-        path: "women's-clothing/:id",
         element: <Item />,
         errorElement: <Error />
       },
