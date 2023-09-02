@@ -518,7 +518,7 @@ html {
 
       width: 70%;
       margin: 25px 0;
-      padding: 40px 0;
+      padding: 20px 20px;
 
       display: flex;
       flex-direction: column;
@@ -539,62 +539,113 @@ html {
         box-shadow: none;
       }
 
-      .items {
+      .items-container {
+        width: 100%;
+
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        row-gap: 40px;
-       
-        .item-container {
+        column-gap: 30px;
+
+        .more-options-container {
           box-sizing: border-box;
 
-          width: 300px;
-          height: 500px;
+          width: 30%;
+          height: max-content;
           padding: 10px;
-  
-          position: relative;
-  
-          background-color: $item-bg;
-          border-radius: 10px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          background-color: $bg-color;
+          color: $text-color;
           box-shadow: 0 0 10px $bg-color;
-          border: 3px solid $logo-color;
-  
-          transition: transform 0.3s ease;
-  
-          &:hover {
-            cursor: pointer;
-            opacity: 0.9;
-            transform: scale(1.01);
-          }
-  
-          .img-container {
-            width: 100%;
-            height: 75%;
-  
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: contain;
-            }
-          }
-  
-          .info {
-            font-size: 0.8rem;
-            
-            width: 100%;
-            height: 20%;
+          
+          border-radius: 10px;
+          border: 1px solid $logo-color;
 
-            @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
-              font-size: 1rem;
+          .more-options {
+            padding: 16px;
+            border-radius: 5px;
+            margin: 0;
+
+            &:hover {
+              background-color: #e5d9b61c;
+              color: $hover-color;
+              cursor: pointer;
             }
 
-            p {
+            &:active {
+              color: $logo-color;
+            }
+
+            &.clicked {
+              color: $logo-color;
               font-weight: bold;
             }
           }
         }
+
+        .items {
+          width: 100%;
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          row-gap: 40px;
+         
+          .item-container {
+            box-sizing: border-box;
+  
+            width: 300px;
+            height: 500px;
+            padding: 10px;
+    
+            position: relative;
+    
+            background-color: $item-bg;
+            border-radius: 10px;
+            box-shadow: 0 0 10px $bg-color;
+            border: 3px solid $logo-color;
+    
+            transition: transform 0.3s ease;
+    
+            &:hover {
+              cursor: pointer;
+              opacity: 0.9;
+              transform: scale(1.01);
+            }
+    
+            .img-container {
+              width: 100%;
+              height: 75%;
+    
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+    
+            .info {
+              font-size: 0.8rem;
+              
+              width: 100%;
+              height: 20%;
+  
+              @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+                font-size: 1rem;
+              }
+  
+              p {
+                font-weight: bold;
+              }
+            }
+          }
+        }
       }
+
 
       .pages {
         width: max-content;
@@ -730,14 +781,14 @@ html {
 
             @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
               width: 25%;
-              
-              p {
-                word-wrap: break-word;
-              }
             }
-
+            
             @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
               width: 30%;
+            }
+
+            p {
+              word-wrap: break-word;
             }
 
             img {
@@ -780,35 +831,44 @@ html {
             justify-content: space-between;
           }
 
-          span {
+          button {
             box-sizing: border-box;
             width: 90px;
             padding: 15px;
 
             background-color: $bg-color;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
             box-shadow: 0 0 5px $bg-color;
             border-radius: 10px;
 
-            &:hover {
-              cursor: pointer;
-              box-shadow: 0 0 5px $hover-color;
-              color: $hover-color;
+            text-align: center;
+            color: $text-color;
+
+            outline: none;
+            border: none;
+
+            &:enabled {
+              &:hover {
+                cursor: pointer;
+                box-shadow: 0 0 5px $hover-color;
+                color: $hover-color;
+              }
+  
+              &:active {
+                color: $logo-color;
+              }
+  
+              &.clicked {
+                color: $logo-color;
+                box-shadow: none;
+                border: 1px solid $logo-color;
+              }
             }
 
-            &:active {
-              color: $logo-color;
+            &:disabled {
+              opacity: 0.8;
             }
 
-            &.clicked {
-              color: $logo-color;
-              box-shadow: none;
-              border: 1px solid $logo-color;
-            }
           }
 
         }
@@ -888,6 +948,8 @@ html {
         display: flex;
         flex-direction: column;
         row-gap: 10px;
+
+        width: 55%;
 
         @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-tablet) {
           width: 100%;

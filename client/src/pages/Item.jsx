@@ -11,22 +11,24 @@ import { Context } from "../context/ContextProvider";
 const Item = () => {
   const location = useLocation();
   const { itemObj } = location.state || {};
-  const [img, setImg] = useState(itemObj.thumb_image || "");
-  const [color, setColor] = useState(itemObj.variants[0].sku_color_group || "");
-  const [size, setSize] = useState("");
+  const [img, setImg] = useState(itemObj.DefaultProductImage || "");
+  const [colorName, setColorName] = useState(itemObj.Variants[0].ColorName || "");
+  const [sizeName, setSizeName] = useState("");
   const [sizeError, setSizeError] = useState(true);
 
   const { cart, updateCart } = useContext(Context);
 
+  console.log(itemObj);
+
   // A function that handles the change of varient for this item.
-  const handleColorClick = (img, color) => {
+  const handleColorClick = (img, colorName) => {
     setImg(img);
-    setColor(color);
+    setColorName(colorName);
   };
 
   // A function that handles changes in selected item size.
-  const handleSizeChange = (size) => {
-    setSize(size);
+  const handleSizeChange = (sizeName) => {
+    setSizeName(sizeName);
     setSizeError(false);
   };
 
@@ -34,13 +36,14 @@ const Item = () => {
   const handleAdd = () => {
     // Create a new item obj with following properties.
     const cartItem = {
-      title: itemObj.title,
+      pid: itemObj.ProductId,
+      title: itemObj.DisplayName,
       thumb_image: img,
-      size: size,
+      size: sizeName,
       quantity: 1,
-      color: color,
-      price: itemObj.price,
-      totalPrice: itemObj.price,
+      color: colorName,
+      price: itemObj.OriginalPrice,
+      totalPrice: itemObj.OriginalPrice,
     };
 
     // Create a reference of the cart.
@@ -80,41 +83,61 @@ const Item = () => {
       (item) =>
         item.pid === cartItem.pid &&
         item.thumb_image === cartItem.thumb_image &&
-        item.size === cartItem.size
+        item.size === cartItem.size &&
+        item.color === cartItem.color
     );
   };
+
+  // A function to get all aviable sizes of current variant.
+  const sizes = () => {
+    // Get the current variant.
+    const variant = itemObj.Variants.find((variant) => variant.ColorName === colorName)
+
+    // Return all sizes of that variant as buttons.
+    return variant.Sizes.map((size) => (
+      <button
+        className={`size ${sizeName === size.SizeName ? "clicked" : ""}`}
+        onClick={() => handleSizeChange(size.SizeName)}
+        disabled={!size.Available}
+        key={size.SizeId}
+      >
+        {size.SizeName}
+      </button>
+    ))
+      
+  }
 
   return (
     <div className="item-page-container">
       <div className="img-container">
-        <img src={img} alt={itemObj.title} />
+        <img src={img} alt={itemObj.DisplayName} />
       </div>
       <div className="info-container">
         <div className="info">
-          <h2>{itemObj.title}</h2>
-          <p>Brand: {itemObj.brand}</p>
-          <p>Price: ${itemObj.price}</p>
+          <h2>{itemObj.DisplayName}</h2>
+          <p>Brand: {itemObj.Brand}</p>
+          <p>Price: ${itemObj.OriginalPrice}</p>
         </div>
 
         <h3>Colors:</h3>
         <div className="variants">
-          {itemObj.variants.map((variant) => (
+          {itemObj.Variants.map((variant) => (
             <div
               className={`variant-container ${
-                img === variant.sku_thumb_images[0] ? "clicked" : ""
+                colorName === variant.ColorName ? "clicked" : ""
               }`}
               onClick={() =>
                 handleColorClick(
-                  variant.sku_thumb_images[0],
-                  variant.sku_color_group
+                  variant.ProductImages[0],
+                  variant.ColorName,
                 )
               }
-              key={variant.sku_color_group}
+              key={itemObj.ProductId + variant.ColorName}
             >
-              <p>{variant.sku_color_group}</p>
+              <p>{variant.ColorName}</p>
               <img
-                src={variant.sku_thumb_images[0]}
-                alt={`${variant.sku_color_group} variant`}
+                src={variant.SwatchImage}
+                alt={`${variant.ColorName} variant`}
               />
             </div>
           ))}
@@ -122,48 +145,7 @@ const Item = () => {
 
         <h3>Sizes: {sizeError && <span id="error">Select a size!</span>}</h3>
         <div className="size-container">
-          <span
-            className={`size ${size === "XS" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("XS")}
-          >
-            XS
-          </span>
-          <span
-            className={`size ${size === "S" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("S")}
-          >
-            S
-          </span>
-          <span
-            className={`size ${size === "M" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("M")}
-          >
-            M
-          </span>
-          <span
-            className={`size ${size === "L" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("L")}
-          >
-            L
-          </span>
-          <span
-            className={`size ${size === "XL" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("XL")}
-          >
-            XL
-          </span>
-          <span
-            className={`size ${size === "XXL" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("XXL")}
-          >
-            XXL
-          </span>
-          <span
-            className={`size ${size === "3XL" ? "clicked" : ""}`}
-            onClick={() => handleSizeChange("3XL")}
-          >
-            3XL
-          </span>
+          {sizes()}
         </div>
 
         <button id="add-btn" onClick={handleAdd} disabled={sizeError}>

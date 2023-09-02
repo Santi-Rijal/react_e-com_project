@@ -116,7 +116,7 @@ const NavBar = () => {
             }}
             to={"/men's-clothing"}
           >
-            <span>Men's Clothing</span>
+            <span>Men</span>
           </Link>
 
           <Link
@@ -129,7 +129,7 @@ const NavBar = () => {
             }}
             to={"/women's-clothing"}
           >
-            <span>Women's Clothing</span>
+            <span>Women</span>
           </Link>
 
           <Link
@@ -171,7 +171,7 @@ const NavBar = () => {
             onClick={() => onNavItemClick("men's-clothing")}
             to={"/men's-clothing"}
           >
-            <span>Men's Clothing</span>
+            <span>Men</span>
           </Link>
 
           <Link
@@ -181,7 +181,7 @@ const NavBar = () => {
             onClick={() => onNavItemClick("women's-clothing")}
             to={"/women's-clothing"}
           >
-            <span>Women's Clothing</span>
+            <span>Women</span>
           </Link>
 
           <Link

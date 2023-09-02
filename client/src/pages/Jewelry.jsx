@@ -4,6 +4,7 @@ import axios from "axios";
 
 // Components.
 import ItemCard from "../components/ItemCard";
+import MoreOptions from "../components/MoreOptions";
 
 // A page containing all the jewelry.
 const Jewelery = () => {
@@ -46,17 +47,20 @@ const Jewelery = () => {
 
   return (
     <div className="clothing">
-      <div className="items">
-        {jewelry.map((itemObj) => (
-          <Link
-            className="link"
-            to={itemObj.pid}
-            state={{ itemObj: itemObj }}
-            key={itemObj.pid}
-          >
-            <ItemCard key={itemObj.pid} itemObj={itemObj} />
-          </Link>
-        ))}
+      <div className="items-container">
+        <MoreOptions />
+        <div className="items">
+          {jewelry.map((itemObj) => (
+            <Link
+              className="link"
+              to={itemObj.pid}
+              state={{ itemObj: itemObj }}
+              key={itemObj.pid}
+            >
+              <ItemCard key={itemObj.pid} itemObj={itemObj} />
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="pages">
