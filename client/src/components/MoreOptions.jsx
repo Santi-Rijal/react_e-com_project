@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 // Context.
-import { Context } from '../context/ContextProvider';
+import { Context } from "../context/ContextProvider";
 
 const MoreOptions = () => {
   const [categories, setCategories] = useState([]);
@@ -13,30 +13,32 @@ const MoreOptions = () => {
   useEffect(() => {
     const fetchCat = async () => {
       const options = {
-        method: 'GET',
-        url: 'https://apidojo-forever21-v1.p.rapidapi.com/categories/v2/list',
+        method: "GET",
+        url: "https://apidojo-forever21-v1.p.rapidapi.com/categories/v2/list",
         headers: {
           "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
-        }
-      }
+          "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
+        },
+      };
 
       try {
         const res = await axios.request(options);
-        const data = clickedId === "women's-clothing" ? await res.data.menuItemList[0].ChildMenus[1].ChildMenus : await res.data.menuItemList[0].ChildMenus[4].ChildMenus;
-        setCategories(data)
-      }
-      catch (err) {
+        const data =
+          clickedId === "women's-clothing"
+            ? await res.data.menuItemList[0].ChildMenus[1].ChildMenus
+            : await res.data.menuItemList[0].ChildMenus[4].ChildMenus;
+        setCategories(data);
+      } catch (err) {
         console.log(err);
       }
-    }
+    };
 
     fetchCat();
-  }, [clickedId])
+  }, [clickedId]);
 
   const handleClick = (cat) => {
     updateWomenCat(cat);
-  }
+  };
 
   return (
     <div className="more-options-container">
@@ -60,6 +62,6 @@ const MoreOptions = () => {
       ))}
     </div>
   );
-}
+};
 
-export default MoreOptions
+export default MoreOptions;

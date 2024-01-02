@@ -1154,6 +1154,88 @@ html {
       }
     }
 
+    .login-register-page-container {
+
+      padding: 2em;
+
+      .container {
+        background-color: #1a1a1a;
+
+        display: flex;
+        column-gap: 2em;
+
+        padding: 5em;
+
+        border-radius: 20px;
+        box-shadow: 0 0 10px $text-color;
+
+        .login {
+          width: 50%;
+
+          display: flex;
+          flex-direction: column;
+          row-gap: 10px;
+
+          .input-container {
+            display: flex;
+            flex-direction: column;
+
+            p {
+              margin: 0;
+            }
+
+            input {
+              height: 2em;
+              outline: none;
+
+              padding: 0 10px;
+              margin-top: 5px;
+
+              border-radius: 5px;
+              border: none;
+            }
+
+            button {
+              font-size: 1.2rem;
+              padding: 5px;
+              margin-top: 10px;
+
+              border: 1px solid $logo-color;
+              border-radius: 5px;
+              box-shadow: 0 0 10px $bg-color;
+
+              background-color: $bg-color;
+              color: $text-color;
+
+              cursor: pointer;
+
+              &:hover {
+                box-shadow: 0 0 5px $hover-color;
+              }
+            }
+          }
+
+          .other-options-divider {
+            display: flex;
+
+            hr {
+              width: 30%;
+              border: 1px solid $logo-color
+            }
+          }
+        }
+
+        .register {
+          width: 50%;
+        }
+
+        p, span {
+          color: $text-color
+        }
+
+      }
+    }
+
     // Footer container.
     .footer-container {
       width: 100%;
