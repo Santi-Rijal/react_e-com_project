@@ -14,24 +14,25 @@ const WomenClothing = () => {
   const [womenClothing, setWomenClothing] = useState([]);
   const [pagenum, setPagenum] = useState(1);
 
-  const { catWomen } = useContext(Context);
+  const { cat } = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(cat);
       const options = {
-        method: 'GET',
-        url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list',
+        method: "GET",
+        url: "https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list",
         params: {
-          category: catWomen,
-          pageSize: '9',
+          category: cat,
+          pageSize: "9",
           pageNumber: pagenum,
-          sortby: '1'
+          sortby: "1",
         },
         headers: {
           "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
           "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
-        }
-      }
+        },
+      };
 
       try {
         const res = await axios.request(options);
@@ -43,7 +44,7 @@ const WomenClothing = () => {
     };
 
     fetchData();
-  }, [pagenum, catWomen]);
+  }, [pagenum, cat]);
 
   // A function that handles page changes.
   const handlePageChange = (e) => {

@@ -78,7 +78,9 @@ const NavBar = () => {
       {!showNavBar ? (
         <div className="menu-container">
           <AiOutlineMenuUnfold onClick={onUnFoldNav} />
-          <span>{clickedId}</span>
+
+          <span className="current-page">{clickedId.toUpperCase()}</span>
+
           <Link
             className={`link ${clickedId === "cart" ? "clicked" : ""}`}
             onClick={() => onNavItemClick("cart")}
@@ -135,12 +137,12 @@ const NavBar = () => {
           </Link>
 
           <Link
-            className={`link ${clickedId === "jewlery" ? "clicked" : ""}`}
+            className={`link ${clickedId === "jewelry" ? "clicked" : ""}`}
             onClick={() => {
-              onNavItemClick("jewlery");
+              onNavItemClick("jewelry");
               onUnFoldNav();
             }}
-            to={"/jewlery"}
+            to={"/jewelry"}
           >
             <span>Jewelery</span>
           </Link>

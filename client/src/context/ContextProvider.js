@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const Context = createContext(); // Create a context and export it.
 
@@ -7,7 +7,7 @@ export const ContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("cart-items")) || []
   );
   const [clickedId, setClickedId] = useState("home");
-  const [catWomen, setCatWomen] = useState("women_main");
+  const [cat, setCat] = useState("");
 
   // A function used to set a new cart as well as save it to local storage.
   const updateCart = (newCart) => {
@@ -21,19 +21,29 @@ export const ContextProvider = ({ children }) => {
   };
 
   // A function to set current caterogy filter for women's page.
-  const updateWomenCat = (cat) => {
-    setCatWomen(cat);
-  }
+  const updateCat = (cat) => {
+    setCat(cat);
+  };
+
+  useEffect(() => {
+    if (clickedId === "women's-clothing") {
+      setCat("app_main_women_new_arrivals_clothing");
+    } else if (clickedId === "men's-clothing") {
+      setCat("mens_clothing_mens_new_arrivals_clothing");
+    } else {
+      setCat("");
+    }
+  }, [clickedId]);
 
   return (
     <Context.Provider
       value={{
         cart,
         clickedId,
-        catWomen,
+        cat,
         updateCart,
         updateClickedNavId,
-        updateWomenCat,
+        updateCat,
       }}
     >
       {children}

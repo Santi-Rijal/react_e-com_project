@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 // Context.
 import { Context } from "../context/ContextProvider";
@@ -8,7 +7,7 @@ import { Context } from "../context/ContextProvider";
 const MoreOptions = () => {
   const [categories, setCategories] = useState([]);
 
-  const { clickedId, catWomen, updateWomenCat } = useContext(Context);
+  const { clickedId, cat, updateCat } = useContext(Context);
 
   useEffect(() => {
     const fetchCat = async () => {
@@ -23,41 +22,45 @@ const MoreOptions = () => {
 
       try {
         const res = await axios.request(options);
-        const data =
-          clickedId === "women's-clothing"
-            ? await res.data.menuItemList[0].ChildMenus[1].ChildMenus
-            : await res.data.menuItemList[0].ChildMenus[4].ChildMenus;
+        let data = [];
+
+        if (clickedId === "women's-clothing") {
+          data = await res.data.menuItemList[0].ChildMenus[1].ChildMenus[1]
+            .ChildMenus;
+        } else if (clickedId === "men's-clothing") {
+          data = await res.data.menuItemList[0].ChildMenus[3].ChildMenus[1]
+            .ChildMenus;
+        }
+
         setCategories(data);
+        window.localStorage.setItem(`${clickedId}-cat`, JSON.stringify(data));
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchCat();
+    const inStorage = JSON.parse(localStorage.getItem(`${clickedId}-cat`));
+
+    if (inStorage) {
+      setCategories(inStorage);
+    } else {
+      fetchCat();
+    }
   }, [clickedId]);
 
   const handleClick = (cat) => {
-    updateWomenCat(cat);
+    updateCat(cat);
   };
 
   return (
     <div className="more-options-container">
-      <Link
-        className={`link more-options ${
-          clickedId === "women's-clothing" ? "clicked" : ""
-        }`}
-        onClick={() => handleClick("women_main")}
-        to={`/${clickedId}`}
-      >
-        <p>{clickedId === "women's-clothing" ? "Women" : "MEN"}</p>
-      </Link>
-      {categories.map((cat) => (
+      {categories.map((categorie) => (
         <p
-          className={`more-options ${catWomen === cat.Key ? "clicked" : ""}`}
-          key={cat.Key}
-          onClick={() => handleClick(cat.Key)}
+          className={`more-options ${categorie.Key === cat ? "clicked" : ""}`}
+          key={categorie.Key}
+          onClick={() => handleClick(categorie.Key)}
         >
-          {cat.Name}
+          {categorie.Name}
         </p>
       ))}
     </div>

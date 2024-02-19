@@ -45,7 +45,7 @@ const Footer = () => {
             onClick={() => linkClicked("jewelry")}
             to="/jewelry"
           >
-            <p>Jewelery</p>
+            <p>Jewelry</p>
           </Link>
         </section>
 

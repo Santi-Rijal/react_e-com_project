@@ -570,7 +570,7 @@ html {
             margin: 0;
 
             &:hover {
-              background-color: #e5d9b61c;
+              background-color: #e5d9b611;
               color: $hover-color;
               cursor: pointer;
             }
@@ -582,6 +582,7 @@ html {
             &.clicked {
               color: $logo-color;
               font-weight: bold;
+              background-color: #e5d9b623;
             }
           }
         }

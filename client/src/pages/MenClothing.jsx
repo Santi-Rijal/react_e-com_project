@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -6,27 +6,33 @@ import axios from "axios";
 import ItemCard from "../components/ItemCard";
 import MoreOptions from "../components/MoreOptions";
 
+// Context.
+import { Context } from "../context/ContextProvider";
+
 // A page containing all the men's clothing.
 const MenClothing = () => {
   const [menClothing, setMenClothing] = useState([]);
   const [pagenum, setPagenum] = useState(1);
 
+  const { cat } = useContext(Context);
+
   useEffect(() => {
     const fetchData = async () => {
+      console.log(cat);
       const options = {
-        method: 'GET',
-        url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list',
+        method: "GET",
+        url: "https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list",
         params: {
-          category: 'women_main',
-          pageSize: '12',
+          category: cat,
+          pageSize: "12",
           pageNumber: pagenum,
-          sortby: '1'
+          sortby: "1",
         },
         headers: {
           "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
           "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
-        }
-      }
+        },
+      };
 
       try {
         const res = await axios.request(options);
@@ -38,7 +44,7 @@ const MenClothing = () => {
     };
 
     fetchData();
-  }, [pagenum]);
+  }, [pagenum, cat]);
 
   // A function that handles page changes.
   const handlePageChange = (e) => {
