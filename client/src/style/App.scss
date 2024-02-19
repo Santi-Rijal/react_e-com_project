@@ -341,7 +341,7 @@ html {
 
         // The entire hero component.
         .hero-container {     
-          
+
           // Text in top of each image in carousel.
           .foreground {
             position: absolute;
@@ -1169,12 +1169,20 @@ html {
         border-radius: 20px;
         box-shadow: 0 0 10px $text-color;
 
+        @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+          flex-direction: column-reverse;
+        }
+
         .login {
           width: 50%;
 
           display: flex;
           flex-direction: column;
           row-gap: 10px;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            width: 100%;
+          }
 
           .input-container {
             display: flex;
@@ -1213,6 +1221,22 @@ html {
                 box-shadow: 0 0 5px $hover-color;
               }
             }
+
+            .forgot-link {
+              color: $text-color;
+              text-align: end;
+              font-size: 0.8rem;
+              text-decoration: underline;
+              opacity: 80%;
+
+              &:hover {
+                opacity: 60%;
+              }
+
+              &:active {
+                opacity: 30%;
+              }
+            }
           }
 
           .other-options-divider {
@@ -1227,10 +1251,52 @@ html {
 
         .register {
           width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+            width: 100%;
+          }
+
+          h1 {
+            color: $logo-color;
+            font-size: 2rem;
+            text-align: center;
+
+            @media screen and (min-width: $min-layout-breakpoint-tablet) and (max-width: $max-layout-breakpoint-tablet) {
+              font-size: 1.5rem;
+            }
+
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              font-size: 1.4rem;
+            }
+          }
+
+          p {
+            text-align: center;
+
+            @media screen and (min-width: $min-layout-breakpoint-mobile) and (max-width: $max-layout-breakpoint-mobile) {
+              font-size: 0.8rem;
+            }
+
+            .register-link {
+              color: $text-color;
+
+              &:hover {
+                opacity: 60%;
+              }
+
+              &:active {
+                opacity: 30%;
+              }
+            }
+          }
         }
 
         p, span {
-          color: $text-color
+          color: $text-color;
         }
 
       }

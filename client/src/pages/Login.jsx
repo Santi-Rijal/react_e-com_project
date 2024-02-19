@@ -19,6 +19,10 @@ const Login = () => {
           </div>
 
           <div className="input-container">
+            <Link className="forgot-link">Forgot password?</Link>
+          </div>
+
+          <div className="input-container">
             <button>Login</button>
           </div>
         </div>
@@ -26,8 +30,12 @@ const Login = () => {
         <div className="register">
           <div>
             <h1>Welcome to NovaMall!</h1>
-            <p>Register with email and password</p>
-            <Link to={"/register"}>Register</Link>
+            <p>
+              Dont have an account?{" "}
+              <Link to={"/register"} className="register-link">
+                Register
+              </Link>
+            </p>
           </div>
         </div>
       </div>
