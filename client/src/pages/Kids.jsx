@@ -1,47 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Context } from "../context/ContextProvider";
 
 // Components.
 import ItemCard from "../components/ItemCard";
 import MoreOptions from "../components/MoreOptions";
 
-// A page containing all the jewelry.
-const Jewelery = () => {
-  const [jewelry, setJewelry] = useState([]);
-  const [pagenum, setPagenum] = useState(1);
-  const [start, setStart] = useState(0);
+// A page containing all the kids items.
+const Kids = () => {
+  const [kids, setKids] = useState([]);
+  const [pagenum, setPagenum] = useState(0);
+
+  const { cat } = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=jewelry&rows=12&start=${start}`;
       const options = {
         method: "GET",
+        url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list",
+        params: {
+          country: "ca",
+          lang: "en",
+          currentpage: pagenum,
+          pagesize: "9",
+          categories: cat,
+        },
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5",
+          "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
         },
       };
 
       try {
-        const res = await axios.request(url, options);
-        const data = await res.data.response.docs;
-        setJewelry(data);
+        const res = await axios.request(options);
+        const data = await res.data.results;
+        setKids(data);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, [pagenum, start]);
+  }, [pagenum, cat]);
 
   // A function that handles page changes.
   const handlePageChange = (e) => {
     const clickedPage = +e.target.getAttribute("value"); // Get which page we are on.
-    const start =
-      clickedPage === 1 ? 12 * clickedPage - 12 : 12 * clickedPage - 11; // Starting row for the api.
-
-    setStart(start);
     setPagenum(clickedPage);
   };
 
@@ -50,14 +56,14 @@ const Jewelery = () => {
       <div className="items-container">
         <MoreOptions />
         <div className="items">
-          {jewelry.map((itemObj) => (
+          {kids?.map((itemObj) => (
             <Link
               className="link"
-              to={itemObj.pid}
+              to={itemObj?.pk}
               state={{ itemObj: itemObj }}
-              key={itemObj.pid}
+              key={itemObj?.code}
             >
-              <ItemCard key={itemObj.pid} itemObj={itemObj} />
+              <ItemCard itemObj={itemObj} />
             </Link>
           ))}
         </div>
@@ -65,37 +71,37 @@ const Jewelery = () => {
 
       <div className="pages">
         <span
+          value="0"
+          onClick={handlePageChange}
+          className={pagenum === 0 ? "clicked" : ""}
+        >
+          1
+        </span>
+        <span
           value="1"
           onClick={handlePageChange}
           className={pagenum === 1 ? "clicked" : ""}
         >
-          1
+          2
         </span>
         <span
           value="2"
           onClick={handlePageChange}
           className={pagenum === 2 ? "clicked" : ""}
         >
-          2
+          3
         </span>
         <span
           value="3"
           onClick={handlePageChange}
           className={pagenum === 3 ? "clicked" : ""}
         >
-          3
+          4
         </span>
         <span
           value="4"
           onClick={handlePageChange}
           className={pagenum === 4 ? "clicked" : ""}
-        >
-          4
-        </span>
-        <span
-          value="5"
-          onClick={handlePageChange}
-          className={pagenum === 5 ? "clicked" : ""}
         >
           5
         </span>
@@ -104,4 +110,4 @@ const Jewelery = () => {
   );
 };
 
-export default Jewelery;
+export default Kids;

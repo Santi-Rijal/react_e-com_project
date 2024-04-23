@@ -13,10 +13,11 @@ const MoreOptions = () => {
     const fetchCat = async () => {
       const options = {
         method: "GET",
-        url: "https://apidojo-forever21-v1.p.rapidapi.com/categories/v2/list",
+        url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/categories/list",
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5",
+          "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
         },
       };
 
@@ -25,11 +26,11 @@ const MoreOptions = () => {
         let data = [];
 
         if (clickedId === "women's-clothing") {
-          data = await res.data.menuItemList[0].ChildMenus[1].ChildMenus[1]
-            .ChildMenus;
+          data = await res?.data[0]?.CategoriesArray[3]?.CategoriesArray;
         } else if (clickedId === "men's-clothing") {
-          data = await res.data.menuItemList[0].ChildMenus[3].ChildMenus[1]
-            .ChildMenus;
+          data = await res?.data[2]?.CategoriesArray[4]?.CategoriesArray;
+        } else if (clickedId === "kids") {
+          data = await res?.data[4]?.CategoriesArray[6]?.CategoriesArray;
         }
 
         setCategories(data);
@@ -54,13 +55,15 @@ const MoreOptions = () => {
 
   return (
     <div className="more-options-container">
-      {categories.map((categorie) => (
+      {categories?.map((categorie) => (
         <p
-          className={`more-options ${categorie.Key === cat ? "clicked" : ""}`}
-          key={categorie.Key}
-          onClick={() => handleClick(categorie.Key)}
+          className={`more-options ${
+            categorie?.tagCodes[0] === cat ? "clicked" : ""
+          }`}
+          key={categorie?.CategoryValue}
+          onClick={() => handleClick(categorie?.tagCodes[0])}
         >
-          {categorie.Name}
+          {categorie?.CatName}
         </p>
       ))}
     </div>

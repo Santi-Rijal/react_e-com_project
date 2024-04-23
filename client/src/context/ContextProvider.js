@@ -27,9 +27,11 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (clickedId === "women's-clothing") {
-      setCat("app_main_women_new_arrivals_clothing");
+      setCat("ladies_all");
     } else if (clickedId === "men's-clothing") {
-      setCat("mens_clothing_mens_new_arrivals_clothing");
+      setCat("men_all");
+    } else if (clickedId === "kids") {
+      setCat("kids_all");
     } else {
       setCat("");
     }

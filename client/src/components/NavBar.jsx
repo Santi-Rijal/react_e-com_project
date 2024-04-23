@@ -137,14 +137,14 @@ const NavBar = () => {
           </Link>
 
           <Link
-            className={`link ${clickedId === "jewelry" ? "clicked" : ""}`}
+            className={`link ${clickedId === "kids" ? "clicked" : ""}`}
             onClick={() => {
-              onNavItemClick("jewelry");
+              onNavItemClick("kids");
               onUnFoldNav();
             }}
-            to={"/jewelry"}
+            to={"/kids"}
           >
-            <span>Jewelery</span>
+            <span>Kids</span>
           </Link>
 
           <Link
@@ -189,11 +189,11 @@ const NavBar = () => {
           </Link>
 
           <Link
-            className={`link ${clickedId === "jewelry" ? "clicked" : ""}`}
-            onClick={() => onNavItemClick("jewelry")}
-            to={"/jewelry"}
+            className={`link ${clickedId === "kids" ? "clicked" : ""}`}
+            onClick={() => onNavItemClick("kids")}
+            to={"/kids"}
           >
-            <span>Jewelry</span>
+            <span>Kids</span>
           </Link>
 
           <Link

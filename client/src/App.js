@@ -6,12 +6,12 @@ import "./style/fonts.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MenClothing from "./pages/MenClothing";
 import WomenClothing from "./pages/WomenClothing";
-import Jewelery from "./pages/Jewelry";
 import Item from "./pages/Item";
 import Cart from "./pages/Cart";
 import { ContextProvider } from "./context/ContextProvider.js";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Kids from "./pages/Kids.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: "/jewelry",
-        element: <Jewelery />,
+        path: "/kids",
+        element: <Kids />,
         errorElement: <Error />,
       },
       {
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: "jewelry/:id",
+        path: "kids/:id",
         element: <Item />,
         errorElement: <Error />,
       },

@@ -10,7 +10,7 @@ $logo-bg-color: #1a1a1a;
 $bg-color: #000;
 $text-color: #d8c690;
 $hover-color: #e5d9b6;
-$item-bg: #dbdbdb;
+$item-bg: #f3f3f3;
 
 $error: #7a0e0e;
 
@@ -563,6 +563,8 @@ html {
           
           border-radius: 10px;
           border: 1px solid $logo-color;
+
+          overflow-y: auto;
 
           .more-options {
             padding: 16px;

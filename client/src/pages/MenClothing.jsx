@@ -12,7 +12,7 @@ import { Context } from "../context/ContextProvider";
 // A page containing all the men's clothing.
 const MenClothing = () => {
   const [menClothing, setMenClothing] = useState([]);
-  const [pagenum, setPagenum] = useState(1);
+  const [pagenum, setPagenum] = useState(0);
 
   const { cat } = useContext(Context);
 
@@ -21,22 +21,24 @@ const MenClothing = () => {
       console.log(cat);
       const options = {
         method: "GET",
-        url: "https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list",
+        url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list",
         params: {
-          category: cat,
-          pageSize: "12",
-          pageNumber: pagenum,
-          sortby: "1",
+          country: "ca",
+          lang: "en",
+          currentpage: pagenum,
+          pagesize: "9",
+          categories: cat,
         },
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5",
+          "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
         },
       };
 
       try {
         const res = await axios.request(options);
-        const data = await res.data.CatalogProducts;
+        const data = await res.data.results;
         setMenClothing(data);
       } catch (error) {
         console.error(error);
@@ -57,12 +59,12 @@ const MenClothing = () => {
       <div className="items-container">
         <MoreOptions />
         <div className="items">
-          {menClothing.map((itemObj) => (
+          {menClothing?.map((itemObj) => (
             <Link
               className="link"
-              to={itemObj.pid}
+              to={itemObj?.pk}
               state={{ itemObj: itemObj }}
-              key={itemObj.ProductId}
+              key={itemObj?.code}
             >
               <ItemCard itemObj={itemObj} />
             </Link>
@@ -72,37 +74,37 @@ const MenClothing = () => {
 
       <div className="pages">
         <span
+          value="0"
+          onClick={handlePageChange}
+          className={pagenum === 0 ? "clicked" : ""}
+        >
+          1
+        </span>
+        <span
           value="1"
           onClick={handlePageChange}
           className={pagenum === 1 ? "clicked" : ""}
         >
-          1
+          2
         </span>
         <span
           value="2"
           onClick={handlePageChange}
           className={pagenum === 2 ? "clicked" : ""}
         >
-          2
+          3
         </span>
         <span
           value="3"
           onClick={handlePageChange}
           className={pagenum === 3 ? "clicked" : ""}
         >
-          3
+          4
         </span>
         <span
           value="4"
           onClick={handlePageChange}
           className={pagenum === 4 ? "clicked" : ""}
-        >
-          4
-        </span>
-        <span
-          value="5"
-          onClick={handlePageChange}
-          className={pagenum === 5 ? "clicked" : ""}
         >
           5
         </span>
