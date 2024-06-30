@@ -11,9 +11,7 @@ import { Context } from "../context/ContextProvider";
 const Item = () => {
   const location = useLocation();
   const { itemObj } = location.state || {};
-  const [img, setImg] = useState(
-    itemObj?.images[0]?.baseUrl || itemObj?.images[0]?.url || ""
-  );
+  const img = itemObj?.images[0]?.baseUrl || itemObj?.images[0]?.url || "";
   const [colorName, setColorName] = useState(
     itemObj?.articleColorNames[0] || ""
   );
@@ -131,6 +129,8 @@ const Item = () => {
                   <p>{variant}</p>
                 </div>
               );
+            } else {
+              return;
             }
           })}
         </div>
