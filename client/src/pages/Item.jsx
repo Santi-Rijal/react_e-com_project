@@ -20,8 +20,6 @@ const Item = () => {
 
   const { cart, updateCart } = useContext(Context);
 
-  console.log(itemObj);
-
   // A function that handles the change of varient for this item.
   const handleColorClick = (colorName) => {
     setColorName(colorName);
