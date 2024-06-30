@@ -11,8 +11,12 @@ import { Context } from "../context/ContextProvider";
 const Item = () => {
   const location = useLocation();
   const { itemObj } = location.state || {};
-  const [img, setImg] = useState(itemObj.DefaultProductImage || "");
-  const [colorName, setColorName] = useState(itemObj.Variants[0].ColorName || "");
+  const [img, setImg] = useState(
+    itemObj?.images[0]?.baseUrl || itemObj?.images[0]?.url || ""
+  );
+  const [colorName, setColorName] = useState(
+    itemObj?.articleColorNames[0] || ""
+  );
   const [sizeName, setSizeName] = useState("");
   const [sizeError, setSizeError] = useState(true);
 
@@ -21,8 +25,7 @@ const Item = () => {
   console.log(itemObj);
 
   // A function that handles the change of varient for this item.
-  const handleColorClick = (img, colorName) => {
-    setImg(img);
+  const handleColorClick = (colorName) => {
     setColorName(colorName);
   };
 
@@ -36,14 +39,14 @@ const Item = () => {
   const handleAdd = () => {
     // Create a new item obj with following properties.
     const cartItem = {
-      pid: itemObj.ProductId,
-      title: itemObj.DisplayName,
+      pid: itemObj?.pk,
+      title: itemObj?.name,
       thumb_image: img,
       size: sizeName,
       quantity: 1,
       color: colorName,
-      price: itemObj.OriginalPrice,
-      totalPrice: itemObj.OriginalPrice,
+      price: itemObj?.price?.value,
+      totalPrice: itemObj?.price?.value,
     };
 
     // Create a reference of the cart.
@@ -90,63 +93,50 @@ const Item = () => {
 
   // A function to get all aviable sizes of current variant.
   const sizes = () => {
-    // Get the current variant.
-    const variant = itemObj.Variants.find((variant) => variant.ColorName === colorName)
-
-    // Return all sizes of that variant as buttons.
-    return variant.Sizes.map((size) => (
+    return itemObj?.variantSizes.map((size) => (
       <button
-        className={`size ${sizeName === size.SizeName ? "clicked" : ""}`}
-        onClick={() => handleSizeChange(size.SizeName)}
-        disabled={!size.Available}
-        key={size.SizeId}
+        className={`size ${sizeName === size?.filterCode ? "clicked" : ""}`}
+        onClick={() => handleSizeChange(size?.filterCode)}
+        key={size?.orderFilter}
       >
-        {size.SizeName}
+        {size?.filterCode}
       </button>
-    ))
-      
-  }
+    ));
+  };
 
   return (
     <div className="item-page-container">
       <div className="img-container">
-        <img src={img} alt={itemObj.DisplayName} />
+        <img src={img} alt={itemObj?.name} />
       </div>
       <div className="info-container">
         <div className="info">
-          <h2>{itemObj.DisplayName}</h2>
-          <p>Brand: {itemObj.Brand}</p>
-          <p>Price: ${itemObj.OriginalPrice}</p>
+          <h2>{itemObj?.name}</h2>
+          <p>Brand: {itemObj?.brandName}</p>
+          <p>Price: {itemObj?.price?.formattedValue}</p>
         </div>
 
         <h3>Colors:</h3>
         <div className="variants">
-          {itemObj.Variants.map((variant) => (
-            <div
-              className={`variant-container ${
-                colorName === variant.ColorName ? "clicked" : ""
-              }`}
-              onClick={() =>
-                handleColorClick(
-                  variant.ProductImages[0],
-                  variant.ColorName,
-                )
-              }
-              key={itemObj.ProductId + variant.ColorName}
-            >
-              <p>{variant.ColorName}</p>
-              <img
-                src={variant.SwatchImage}
-                alt={`${variant.ColorName} variant`}
-              />
-            </div>
-          ))}
+          {itemObj?.articleColorNames.map((variant) => {
+            if (variant !== "dc") {
+              return (
+                <div
+                  className={`variant-container ${
+                    colorName === variant ? "clicked" : ""
+                  }`}
+                  onClick={() => handleColorClick(variant)}
+                  key={itemObj?.pk + variant}
+                >
+                  <p>{variant}</p>
+                </div>
+              );
+            }
+          })}
         </div>
 
         <h3>Sizes: {sizeError && <span id="error">Select a size!</span>}</h3>
-        <div className="size-container">
-          {sizes()}
-        </div>
+        <div className="size-container">{sizes()}</div>
 
         <button id="add-btn" onClick={handleAdd} disabled={sizeError}>
           <FaOpencart /> Add to cart

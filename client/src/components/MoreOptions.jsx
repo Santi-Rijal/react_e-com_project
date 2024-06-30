@@ -1,65 +1,73 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 
 // Context.
-import { Context } from '../context/ContextProvider';
+import { Context } from "../context/ContextProvider";
 
 const MoreOptions = () => {
   const [categories, setCategories] = useState([]);
 
-  const { clickedId, catWomen, updateWomenCat } = useContext(Context);
+  const { clickedId, cat, updateCat } = useContext(Context);
 
   useEffect(() => {
     const fetchCat = async () => {
       const options = {
-        method: 'GET',
-        url: 'https://apidojo-forever21-v1.p.rapidapi.com/categories/v2/list',
+        method: "GET",
+        url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/categories/list",
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
-        }
-      }
+          "X-RapidAPI-Key":
+            "5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5",
+          "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
+        },
+      };
 
       try {
         const res = await axios.request(options);
-        const data = clickedId === "women's-clothing" ? await res.data.menuItemList[0].ChildMenus[1].ChildMenus : await res.data.menuItemList[0].ChildMenus[4].ChildMenus;
-        setCategories(data)
-      }
-      catch (err) {
+        let data = [];
+
+        if (clickedId === "women's-clothing") {
+          data = await res?.data[0]?.CategoriesArray[3]?.CategoriesArray;
+        } else if (clickedId === "men's-clothing") {
+          data = await res?.data[2]?.CategoriesArray[4]?.CategoriesArray;
+        } else if (clickedId === "kids") {
+          data = await res?.data[4]?.CategoriesArray[6]?.CategoriesArray;
+        }
+
+        setCategories(data);
+        window.localStorage.setItem(`${clickedId}-cat`, JSON.stringify(data));
+      } catch (err) {
         console.log(err);
       }
-    }
+    };
 
-    fetchCat();
-  }, [clickedId])
+    const inStorage = JSON.parse(localStorage.getItem(`${clickedId}-cat`));
+
+    if (inStorage) {
+      setCategories(inStorage);
+    } else {
+      fetchCat();
+    }
+  }, [clickedId]);
 
   const handleClick = (cat) => {
-    updateWomenCat(cat);
-  }
+    updateCat(cat);
+  };
 
   return (
     <div className="more-options-container">
-      <Link
-        className={`link more-options ${
-          clickedId === "women's-clothing" ? "clicked" : ""
-        }`}
-        onClick={() => handleClick("women_main")}
-        to={`/${clickedId}`}
-      >
-        <p>{clickedId === "women's-clothing" ? "Women" : "MEN"}</p>
-      </Link>
-      {categories.map((cat) => (
+      {categories?.map((categorie) => (
         <p
-          className={`more-options ${catWomen === cat.Key ? "clicked" : ""}`}
-          key={cat.Key}
-          onClick={() => handleClick(cat.Key)}
+          className={`more-options ${
+            categorie?.tagCodes[0] === cat ? "clicked" : ""
+          }`}
+          key={categorie?.CategoryValue}
+          onClick={() => handleClick(categorie?.tagCodes[0])}
         >
-          {cat.Name}
+          {categorie?.CatName}
         </p>
       ))}
     </div>
   );
-}
+};
 
-export default MoreOptions
+export default MoreOptions;
