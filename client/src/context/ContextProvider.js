@@ -39,7 +39,6 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(cat);
       const options = {
         method: "GET",
         url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list",
