@@ -127,9 +127,8 @@ const Item = () => {
                   <p>{variant}</p>
                 </div>
               );
-            } else {
-              return;
             }
+            return null;
           })}
         </div>
 
