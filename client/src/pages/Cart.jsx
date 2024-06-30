@@ -23,7 +23,10 @@ const Cart = () => {
     <div className="cart-page-container">
       <div className="cart-items-container">
         {cart.map((cartItem) => (
-          <CartItem key={cartItem.pid + cartItem.color + cartItem.size} cartItem={cartItem} />
+          <CartItem
+            key={cartItem.pid + cartItem.color + cartItem.size}
+            cartItem={cartItem}
+          />
         ))}
       </div>
 
@@ -34,10 +37,6 @@ const Cart = () => {
               <h5>Order Value</h5>
               <h5>${calculateTotalPrice().toFixed(2)}</h5>
             </div>
-            <div className="delivery space-between">
-              <h5>Delivery</h5>
-              <h5>$8.00</h5>
-            </div>
           </div>
         )}
 
@@ -45,9 +44,7 @@ const Cart = () => {
 
         <div className="total space-between">
           <h3>Total</h3>
-          <h3>
-            ${(calculateTotalPrice() + (cart.length > 0 ? 8 : 0)).toFixed(2)}
-          </h3>
+          <h3>${calculateTotalPrice().toFixed(2)}</h3>
         </div>
 
         <p id="tax">* Item prices exclude tax</p>
