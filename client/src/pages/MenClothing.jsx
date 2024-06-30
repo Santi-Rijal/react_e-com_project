@@ -1,97 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 // Components.
 import ItemCard from "../components/ItemCard";
+import MoreOptions from "../components/MoreOptions";
+
+// Context.
+import { Context } from "../context/ContextProvider";
 
 // A page containing all the men's clothing.
 const MenClothing = () => {
-  const [menClothing, setMenClothing] = useState([]);
-  const [pagenum, setPagenum] = useState(1);
-  const [start, setStart] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://apidojo-forever21-v1.p.rapidapi.com/products/search?query=clothing&rows=12&start=${start}&gender=Male`;
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_FOREVER21_API_KEY,
-          "X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
-        },
-      };
-
-      try {
-        const res = await axios.request(url, options);
-        const data = await res.data.response.docs;
-        setMenClothing(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [pagenum, start]);
-
-  // A function that handles page changes.
-  const handlePageChange = (e) => {
-    const clickedPage = +e.target.getAttribute("value"); // Get which page we are on.
-    const start =
-      clickedPage === 1 ? 12 * clickedPage - 12 : 12 * clickedPage - 11; // Starting row for the api.
-
-    setStart(start);
-    setPagenum(clickedPage);
-  };
+  const { pending, data, handlePageChange, pagenum } = useContext(Context);
 
   return (
     <div className="clothing">
-      <div className="items">
-        {menClothing.map((itemObj) => (
-          <Link
-            className="link"
-            to={itemObj.pid}
-            state={{ itemObj: itemObj }}
-            key={itemObj.pid}
-          >
-            <ItemCard key={itemObj.pid} itemObj={itemObj} />
-          </Link>
-        ))}
+      <div className="items-container">
+        <MoreOptions />
+        {!pending && (
+          <div className="items">
+            {data?.map((itemObj) => (
+              <Link
+                className="link"
+                to={itemObj?.pk}
+                state={{ itemObj: itemObj }}
+                key={itemObj?.code}
+              >
+                <ItemCard itemObj={itemObj} />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="pages">
+        <span
+          value="0"
+          onClick={handlePageChange}
+          className={pagenum === 0 ? "clicked" : ""}
+        >
+          1
+        </span>
         <span
           value="1"
           onClick={handlePageChange}
           className={pagenum === 1 ? "clicked" : ""}
         >
-          1
+          2
         </span>
         <span
           value="2"
           onClick={handlePageChange}
           className={pagenum === 2 ? "clicked" : ""}
         >
-          2
+          3
         </span>
         <span
           value="3"
           onClick={handlePageChange}
           className={pagenum === 3 ? "clicked" : ""}
         >
-          3
+          4
         </span>
         <span
           value="4"
           onClick={handlePageChange}
           className={pagenum === 4 ? "clicked" : ""}
-        >
-          4
-        </span>
-        <span
-          value="5"
-          onClick={handlePageChange}
-          className={pagenum === 5 ? "clicked" : ""}
         >
           5
         </span>

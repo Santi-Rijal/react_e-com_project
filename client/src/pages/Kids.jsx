@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../context/ContextProvider";
 
 // Components.
 import ItemCard from "../components/ItemCard";
 import MoreOptions from "../components/MoreOptions";
 
-// Context.
-import { Context } from "../context/ContextProvider";
-
-// A page containing all the women's clothing.
-const WomenClothing = () => {
+// A page containing all the kids items.
+const Kids = () => {
   const { pending, data, handlePageChange, pagenum } = useContext(Context);
 
   return (
@@ -73,4 +71,4 @@ const WomenClothing = () => {
   );
 };
 
-export default WomenClothing;
+export default Kids;

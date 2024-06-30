@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -76,7 +78,9 @@ const NavBar = () => {
       {!showNavBar ? (
         <div className="menu-container">
           <AiOutlineMenuUnfold onClick={onUnFoldNav} />
-          <span>{clickedId}</span>
+
+          <span className="current-page">{clickedId.toUpperCase()}</span>
+
           <Link
             className={`link ${clickedId === "cart" ? "clicked" : ""}`}
             onClick={() => onNavItemClick("cart")}
@@ -116,7 +120,7 @@ const NavBar = () => {
             }}
             to={"/men's-clothing"}
           >
-            <span>Men's Clothing</span>
+            <span>Men</span>
           </Link>
 
           <Link
@@ -129,18 +133,18 @@ const NavBar = () => {
             }}
             to={"/women's-clothing"}
           >
-            <span>Women's Clothing</span>
+            <span>Women</span>
           </Link>
 
           <Link
-            className={`link ${clickedId === "jewlery" ? "clicked" : ""}`}
+            className={`link ${clickedId === "kids" ? "clicked" : ""}`}
             onClick={() => {
-              onNavItemClick("jewlery");
+              onNavItemClick("kids");
               onUnFoldNav();
             }}
-            to={"/jewlery"}
+            to={"/kids"}
           >
-            <span>Jewelery</span>
+            <span>Kids</span>
           </Link>
 
           <Link
@@ -171,7 +175,7 @@ const NavBar = () => {
             onClick={() => onNavItemClick("men's-clothing")}
             to={"/men's-clothing"}
           >
-            <span>Men's Clothing</span>
+            <span>Men</span>
           </Link>
 
           <Link
@@ -181,15 +185,15 @@ const NavBar = () => {
             onClick={() => onNavItemClick("women's-clothing")}
             to={"/women's-clothing"}
           >
-            <span>Women's Clothing</span>
+            <span>Women</span>
           </Link>
 
           <Link
-            className={`link ${clickedId === "jewelry" ? "clicked" : ""}`}
-            onClick={() => onNavItemClick("jewelry")}
-            to={"/jewelry"}
+            className={`link ${clickedId === "kids" ? "clicked" : ""}`}
+            onClick={() => onNavItemClick("kids")}
+            to={"/kids"}
           >
-            <span>Jewelry</span>
+            <span>Kids</span>
           </Link>
 
           <Link
