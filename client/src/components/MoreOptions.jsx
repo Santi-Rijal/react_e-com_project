@@ -28,7 +28,7 @@ const MoreOptions = () => {
         if (clickedId === "women's-clothing") {
           data = await res?.data[0]?.CategoriesArray[3]?.CategoriesArray;
         } else if (clickedId === "men's-clothing") {
-          data = await res?.data[2]?.CategoriesArray[4]?.CategoriesArray;
+          data = await res?.data[2]?.CategoriesArray[2]?.CategoriesArray;
         } else if (clickedId === "kids") {
           data = await res?.data[4]?.CategoriesArray[6]?.CategoriesArray;
         }
