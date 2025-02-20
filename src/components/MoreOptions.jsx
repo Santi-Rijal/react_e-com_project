@@ -4,10 +4,27 @@ import React, { useContext, useEffect, useState } from "react";
 // Context.
 import { Context } from "../context/ContextProvider";
 
+import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
+
 const MoreOptions = () => {
   const [categories, setCategories] = useState([]);
+  const [isSmallerScreen, setIsSmallerScreen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { clickedId, cat, updateCat } = useContext(Context);
+
+  const resize = () => {
+    if (window.innerWidth <= 768) {
+      setIsSmallerScreen(true);
+      setIsMenuOpen(false);
+      return;
+    }
+
+    setIsSmallerScreen(false);
+    setIsMenuOpen(true);
+  };
+
+  window.addEventListener("resize", resize);
 
   useEffect(() => {
     const fetchCat = async () => {
@@ -15,8 +32,7 @@ const MoreOptions = () => {
         method: "GET",
         url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/categories/list",
         headers: {
-          "X-RapidAPI-Key":
-            "5c8c14735bmsh3ddd43190f166dfp1d6a64jsn960d37cf18b5",
+          "X-RapidAPI-Key": process.env.REACT_APP_HANDM_API_KEY,
           "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
         },
       };
@@ -50,11 +66,23 @@ const MoreOptions = () => {
   }, [clickedId]);
 
   const handleClick = (cat) => {
+    console.log(cat);
     updateCat(cat);
   };
 
-  return (
+  return isSmallerScreen && !isMenuOpen ? (
+    <AiOutlineMenuUnfold
+      onClick={() => setIsMenuOpen((prev) => !prev)}
+      className="mobile-more-option-menu"
+    />
+  ) : (
     <div className="more-options-container">
+      {isSmallerScreen && (
+        <AiOutlineMenuFold
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="mobile-more-option-menu"
+        />
+      )}
       {categories?.map((categorie) => (
         <p
           className={`more-options ${

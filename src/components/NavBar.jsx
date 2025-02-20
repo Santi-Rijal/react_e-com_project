@@ -212,7 +212,7 @@ const NavBar = () => {
           </Link>
 
           <Link
-            className={`link ${clickedId === "Login" ? "clicked" : ""}`}
+            className={`link ${clickedId === "login" ? "clicked" : ""}`}
             id="login"
             onClick={() => onNavItemClick("login")}
             to={"/login"}

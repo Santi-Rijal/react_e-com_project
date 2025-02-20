@@ -73,9 +73,9 @@ export const ContextProvider = ({ children }) => {
     if (clickedId === "women's-clothing") {
       setCat("ladies_all");
     } else if (clickedId === "men's-clothing") {
-      setCat("men_all");
+      setCat("men_viewall");
     } else if (clickedId === "kids") {
-      setCat("kids_all");
+      setCat("kids_kidsroom_products");
     } else {
       setCat("");
     }
